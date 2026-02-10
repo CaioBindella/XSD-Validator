@@ -23,10 +23,10 @@ This application solves the problem of validating large batch files by splitting
 
 ## 📦 Installation
 
-1.  **Clone the repository** (or download the files):
+1.  **Clone the repository**:
     ```bash
-    git clone [https://github.com/your-username/who-ictrp-validator.git](https://github.com/your-username/who-ictrp-validator.git)
-    cd who-ictrp-validator
+    git clone [https://github.com/CaioBindella/XSD-Validator.git](https://github.com/CaioBindella/XSD-Validator.git)
+    cd XSD-Validator
     ```
 
 2.  **Install dependencies**:
