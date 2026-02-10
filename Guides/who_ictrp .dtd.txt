@@ -1,0 +1,143 @@
+
+<!-- 
+		WHO ICTRP XML DTD, http://www.who.int/ictrp
+		DTD Version 1.0: 23-4-2008
+    
+    15-9-2008 - freetext elements moved from Elements health_condition and intervention to Element main and renamed                           hc_freetext and i_freetext
+              - Element health_condition renamed to health_condition_code
+              - Element intervention renamed to intervention_code		
+              - added Elements health_condition_keyword, hc_keyword, hc_code
+              - added Elements intervention_keyword, i_keyword, i_code
+              - renamed Element country to country1
+              - added Element country2
+              - added xml declarations (? for zero or one, * for zero or more, + for 1 or more)
+              - added a few examples to some elements
+
+   16-10-2008 - replaced all * with + because we would like to receive all elements if if they are blank and empty 
+                elements are considered as 1 in the 1:n relationship
+
+   17-10-2008 - renamed main element contact to contacts to avoid redundance 
+              - added a child element called secondary_id under secondary_ids and renamed old secondary_id to sec_id
+
+   14-11-2008 - removed ? from the contacts and criteria and secondary_id elements
+   
+   17-11-2008- added + to source_name 
+ 
+   1-5-2009 - added element trials
+   
+   10-5-2017 - added element ethics_reviews
+
+   31-5-2017 - added element results_actual_enrolment
+
+   9-6-2017  - added element results_url_link, results_summary, results_date_posted, results_date_first_publication, results_baseline_char, results_participant_flow, results_adverse_events, 		results_outcome_measures, results_url_protocol 
+
+   1-9-2017  - added element results_IPD_plan, results_IPD_description
+
+   13-9-2017 - added element results_date_completed
+
+-->
+
+<!ELEMENT trials (trial+)>
+
+<!ELEMENT trial (main,contacts,countries,criteria,health_condition_code,health_condition_keyword,intervention_code,
+          intervention_keyword,primary_outcome,secondary_outcome,secondary_sponsor,secondary_ids,source_support,ethics_reviews)>
+
+<!ELEMENT main (trial_id,utrn?,reg_name,date_registration,primary_sponsor,public_title,acronym?,scientific_title,scientific_acronym?,
+          date_enrolment,type_enrolment,target_size,recruitment_status,url?,study_type,study_design,phase,hc_freetext?,i_freetext?,results_actual_enrolment,results_date_completed,results_url_link,results_summary,           results_date_posted,results_date_first_publication,results_baseline_char,results_participant_flow,results_adverse_events,results_outcome_measures,results_url_protocol,results_IPD_plan, results_IPD_description)>	
+<!ELEMENT trial_id (#PCDATA)>
+<!ELEMENT utrn (#PCDATA)>
+<!ELEMENT reg_name (#PCDATA)>
+<!ELEMENT date_registration (#PCDATA)><!-- dd/mm/yyyy -->
+<!ELEMENT primary_sponsor (#PCDATA)>
+<!ELEMENT public_title (#PCDATA)>
+<!ELEMENT acronym (#PCDATA)>
+<!ELEMENT scientific_title (#PCDATA)>
+<!ELEMENT scientific_acronym (#PCDATA)>
+<!ELEMENT date_enrolment (#PCDATA)><!-- dd/mm/yyyy -->
+<!ELEMENT type_enrolment (#PCDATA)>
+<!ELEMENT target_size (#PCDATA)>
+<!ELEMENT recruitment_status (#PCDATA)><!-- Pending,Recruiting,Suspended,Complete,Other -->
+<!ELEMENT url (#PCDATA)>
+<!ELEMENT study_type (#PCDATA)><!-- interventional,observational -->
+<!ELEMENT study_design (#PCDATA)>
+<!ELEMENT phase (#PCDATA)>
+<!ELEMENT hc_freetext (#PCDATA)>
+<!ELEMENT i_freetext (#PCDATA)>
+<!ELEMENT results_actual_enrolment (#PCDATA)>
+<!ELEMENT results_date_completed (#PCDATA)><!-- dd/mm/yyyy --> 
+<!ELEMENT results_url_link (#PCDATA)>
+<!ELEMENT results_summary (#PCDATA)>
+<!ELEMENT results_date_posted (#PCDATA)><!-- dd/mm/yyyy --> 
+<!ELEMENT results_date_first_publication (#PCDATA)><!-- dd/mm/yyyy --> 
+<!ELEMENT results_baseline_char (#PCDATA)>
+<!ELEMENT results_participant_flow (#PCDATA)> 
+<!ELEMENT results_adverse_events (#PCDATA)> 
+<!ELEMENT results_outcome_measures (#PCDATA)> 
+<!ELEMENT results_url_protocol (#PCDATA)>
+<!ELEMENT results_IPD_plan (#PCDATA)>
+<!ELEMENT results_IPD_description (#PCDATA)>
+
+
+<!ELEMENT contacts (contact+)>
+<!ELEMENT contact (type,firstname,middlename,lastname,address,city,country1,zip,telephone,email,affiliation)>
+<!ELEMENT type (#PCDATA)><!-- Public,Scientific -->
+<!ELEMENT firstname (#PCDATA)>
+<!ELEMENT middlename (#PCDATA)>
+<!ELEMENT lastname (#PCDATA)>
+<!ELEMENT address (#PCDATA)>
+<!ELEMENT city (#PCDATA)>
+<!ELEMENT country1 (#PCDATA)>
+<!ELEMENT zip (#PCDATA)>
+<!ELEMENT telephone (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT affiliation (#PCDATA)>
+
+<!ELEMENT countries (country2+)>
+<!ELEMENT country2 (#PCDATA)>
+
+<!ELEMENT criteria (inclusion_criteria,agemin,agemax,gender,exclusion_criteria)>
+<!ELEMENT inclusion_criteria (#PCDATA)>
+<!ELEMENT agemin (#PCDATA)>
+<!ELEMENT agemax (#PCDATA)>
+<!ELEMENT gender (#PCDATA)>
+<!ELEMENT exclusion_criteria (#PCDATA)>
+
+<!ELEMENT health_condition_code (hc_code+)>
+<!ELEMENT hc_code (#PCDATA)>
+
+<!ELEMENT health_condition_keyword (hc_keyword+)>
+<!ELEMENT hc_keyword (#PCDATA)>
+
+<!ELEMENT intervention_code (i_code+)>
+<!ELEMENT i_code (#PCDATA)>
+
+<!ELEMENT intervention_keyword (i_keyword+)>
+<!ELEMENT i_keyword (#PCDATA)>
+
+<!ELEMENT primary_outcome (prim_outcome+)>
+<!ELEMENT prim_outcome (#PCDATA)>
+
+<!ELEMENT secondary_outcome (sec_outcome+)>
+<!ELEMENT sec_outcome (#PCDATA)>
+
+<!ELEMENT secondary_sponsor (sponsor_name+)>
+<!ELEMENT sponsor_name (#PCDATA)>
+
+<!ELEMENT secondary_ids (secondary_id+)>
+<!ELEMENT secondary_id (sec_id,issuing_authority)>
+<!ELEMENT sec_id (#PCDATA)>
+<!ELEMENT issuing_authority (#PCDATA)>
+
+<!ELEMENT source_support (source_name+)>
+<!ELEMENT source_name (#PCDATA)>
+
+<!ELEMENT ethics_reviews (ethics_review+)>
+<!ELEMENT ethics_review (status,approval_date,contact_name,contact_address,contact_phone,contact_email)>
+<!ELEMENT status (#PCDATA)><!-- Not approved,Approved,NA -->
+<!ELEMENT approval_date (#PCDATA)><!-- dd/mm/yyyy -->
+<!ELEMENT contact_name (#PCDATA)>
+<!ELEMENT contact_address (#PCDATA)> 
+<!ELEMENT contact_phone (#PCDATA)> 
+<!ELEMENT contact_email(#PCDATA)>
+
+

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="trials">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="trial" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="main" type="mainType"/>
+              <xs:element name="contacts" type="contactsType"/>
+              <xs:element name="countries" type="countriesType"/>
+              <xs:element name="criteria" type="criteriaType"/>
+              <xs:element name="health_condition_code" type="healthConditionCodeType"/>
+              <xs:element name="health_condition_keyword" type="healthConditionKeywordType"/>
+              <xs:element name="intervention_code" type="interventionCodeType"/>
+              <xs:element name="intervention_keyword" type="interventionKeywordType"/>
+              <xs:element name="primary_outcome" type="primaryOutcomeType"/>
+              <xs:element name="secondary_outcome" type="secondaryOutcomeType"/>
+              <xs:element name="secondary_sponsor" type="secondarySponsorType"/>
+              <xs:element name="secondary_ids" type="secondaryIdsType"/>
+              <xs:element name="source_support" type="sourceSupportType"/>
+              <xs:element name="ethics_reviews" type="ethicsReviewsType"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="mainType">
+    <xs:sequence>
+      <xs:element name="trial_id" type="xs:string"/>
+      <xs:element name="utrn" type="xs:string" minOccurs="0"/>
+      <xs:element name="reg_name" type="xs:string"/>
+      <xs:element name="date_registration" type="xs:string"/>
+      <xs:element name="primary_sponsor" type="xs:string"/>
+      <xs:element name="public_title" type="xs:string"/>
+      <xs:element name="acronym" type="xs:string" minOccurs="0"/>
+      <xs:element name="scientific_title" type="xs:string"/>
+      <xs:element name="scientific_acronym" type="xs:string" minOccurs="0"/>
+      <xs:element name="date_enrolment" type="xs:string"/>
+      <xs:element name="type_enrolment" type="xs:string"/>
+      <xs:element name="target_size" type="xs:integer"/>
+      <xs:element name="recruitment_status" type="xs:string"/>
+      <xs:element name="url" type="xs:string" minOccurs="0"/>
+      <xs:element name="study_type" type="xs:string"/>
+      <xs:element name="study_design" type="xs:string"/>
+      <xs:element name="phase" type="xs:string"/>
+      <xs:element name="hc_freetext" type="xs:string" minOccurs="0"/>
+      <xs:element name="i_freetext" type="xs:string" minOccurs="0"/>
+      <xs:element name="results_actual_enrolment" type="xs:string"/>
+      <xs:element name="results_date_completed" type="xs:string"/>
+      <xs:element name="results_url_link" type="xs:string"/>
+      <xs:element name="results_summary" type="xs:string"/>
+      <xs:element name="results_date_posted" type="xs:string"/>
+      <xs:element name="results_date_first_publication" type="xs:string"/>
+      <xs:element name="results_baseline_char" type="xs:string"/>
+      <xs:element name="results_participant_flow" type="xs:string"/>
+      <xs:element name="results_adverse_events" type="xs:string"/>
+      <xs:element name="results_outcome_measures" type="xs:string"/>
+      <xs:element name="results_url_protocol" type="xs:string"/>
+      <xs:element name="results_IPD_plan" type="xs:string"/>
+      <xs:element name="results_IPD_description" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="contactsType">
+    <xs:sequence>
+      <xs:element name="contact" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="type" type="xs:string"/>
+            <xs:element name="firstname" type="xs:string"/>
+            <xs:element name="middlename" type="xs:string"/>
+            <xs:element name="lastname" type="xs:string"/>
+            <xs:element name="address" type="xs:string"/>
+            <xs:element name="city" type="xs:string"/>
+            <xs:element name="country1" type="xs:string"/>
+            <xs:element name="zip" type="xs:string"/>
+            <xs:element name="telephone" type="xs:string"/>
+            <xs:element name="email" type="xs:string"/>
+            <xs:element name="affiliation" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="countriesType">
+    <xs:sequence>
+      <xs:element name="country2" type="xs:string" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="criteriaType">
+    <xs:sequence>
+      <xs:element name="inclusion_criteria" type="xs:string"/>
+      <xs:element name="agemin" type="xs:integer"/>
+      <xs:element name="agemax" type="xs:integer"/>
+      <xs:element name="gender" type="xs:string"/>
+      <xs:element name="exclusion_criteria" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="healthConditionCodeType">
+    <xs:sequence><xs:element name="hc_code" type="xs:string" maxOccurs="unbounded"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="healthConditionKeywordType">
+    <xs:sequence><xs:element name="hc_keyword" type="xs:string" maxOccurs="unbounded"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="interventionCodeType">
+    <xs:sequence><xs:element name="i_code" type="xs:string" maxOccurs="unbounded"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="interventionKeywordType">
+    <xs:sequence><xs:element name="i_keyword" type="xs:string" maxOccurs="unbounded"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="primaryOutcomeType">
+    <xs:sequence><xs:element name="prim_outcome" type="xs:string" maxOccurs="unbounded"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="secondaryOutcomeType">
+    <xs:sequence><xs:element name="sec_outcome" type="xs:string" maxOccurs="unbounded"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="secondarySponsorType">
+    <xs:sequence><xs:element name="sponsor_name" type="xs:string" maxOccurs="unbounded"/></xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sourceSupportType">
+    <xs:sequence><xs:element name="source_name" type="xs:string" maxOccurs="unbounded"/></xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="secondaryIdsType">
+    <xs:sequence>
+      <xs:element name="secondary_id" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="sec_id" type="xs:string"/>
+            <xs:element name="issuing_authority" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ethicsReviewsType">
+    <xs:sequence>
+      <xs:element name="ethics_review" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="status" type="xs:string"/>
+            <xs:element name="approval_date" type="xs:string"/>
+            <xs:element name="contact_name" type="xs:string"/>
+            <xs:element name="contact_address" type="xs:string"/>
+            <xs:element name="contact_phone" type="xs:string"/>
+            <xs:element name="contact_email" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
