@@ -61,6 +61,10 @@
         </div>
 
         <div class="tab-pane fade" id="error-pane" role="tabpanel">
+            <div id="csv-download-container" class="text-end mb-3" style="display: none;">
+                <a id="csv-download-btn" href="#" class="btn btn-warning fw-bold">⬇️ Download CSV Error Report</a>
+            </div>
+
             <div id="list-error">
                 <p class="text-center text-muted">No errors found yet.</p>
             </div>
@@ -85,6 +89,7 @@
         spinner.style.display = 'inline-block';
         document.getElementById('list-success').innerHTML = '';
         document.getElementById('list-error').innerHTML = '';
+        document.getElementById('csv-download-container').style.display = 'none';
 
         const formData = new FormData();
         formData.append('file', file);
@@ -135,9 +140,19 @@
 
         // Populate Error Tab
         const divError = document.getElementById('list-error');
+        const csvContainer = document.getElementById('csv-download-container');
+        const csvBtn = document.getElementById('csv-download-btn');
+
         if (data.errors.length === 0) {
             divError.innerHTML = '<p class="text-center text-success">Great! No validation errors found.</p>';
+            csvContainer.style.display = 'none';
         } else {
+            // Show CSV download button if a report was generated
+            if (data.csv_report) {
+                csvBtn.href = '/download/' + data.csv_report;
+                csvContainer.style.display = 'block';
+            }
+
             let html = '';
             data.errors.forEach(item => {
                 // Create list items for each error reason
@@ -147,7 +162,7 @@
                 <div class="card mb-3 border-danger">
                     <div class="card-header bg-danger text-white d-flex justify-content-between">
                         <span>Trial ID: <strong>${item.id}</strong></span>
-                        <span>File: ${item.file}</span>
+                        <span style="font-size: 0.9em; opacity: 0.9;">Path: ${item.folder}</span>
                     </div>
                     <div class="card-body">
                         <h6 class="card-title">Validation Errors:</h6>

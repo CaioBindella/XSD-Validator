@@ -1,7 +1,11 @@
 import os
 import shutil
-from flask import Flask, render_template, request, jsonify
+import csv
+import re
+from datetime import datetime
+from flask import Flask, render_template, request, jsonify, send_from_directory
 from lxml import etree
+
 # Import the validation logic from your module
 from validator import validate_trial_element
 
@@ -9,12 +13,13 @@ app = Flask(__name__)
 
 # Configuration
 UPLOAD_FOLDER = 'uploads'
-SUCCESS_FOLDER = 'processed/success'
-INVALID_FOLDER = 'processed/invalid'
+PROCESSED_FOLDER = 'processed'
+SUCCESS_FOLDER = os.path.join(PROCESSED_FOLDER, 'success')
+INVALID_FOLDER = os.path.join(PROCESSED_FOLDER, 'invalid')
 XSD_FILE = 'who_ictrp.xsd'
 
 # Ensure directories exist
-for folder in [UPLOAD_FOLDER, SUCCESS_FOLDER, INVALID_FOLDER]:
+for folder in [UPLOAD_FOLDER, PROCESSED_FOLDER, SUCCESS_FOLDER, INVALID_FOLDER]:
     os.makedirs(folder, exist_ok=True)
 
 def clean_processing_folders():
@@ -24,9 +29,22 @@ def clean_processing_folders():
             shutil.rmtree(folder)
             os.makedirs(folder)
 
+def sanitize_folder_name(name):
+    """Sanitizes the error reason to create a valid OS directory name."""
+    # Remove invalid characters for folders (\ / * ? : " < > |)
+    safe_name = re.sub(r'[\\/*?:"<>|]', "", name)
+    # Remove newlines and limit to 80 characters to avoid OS path length issues
+    safe_name = safe_name.replace('\n', ' ').replace('\r', '')
+    return safe_name[:80].strip()
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/download/<filename>')
+def download_csv(filename):
+    """Route to download the generated CSV report."""
+    return send_from_directory(PROCESSED_FOLDER, filename, as_attachment=True)
 
 @app.route('/process', methods=['POST'])
 def process_file():
@@ -46,7 +64,7 @@ def process_file():
         return jsonify({'error': f'XSD file not found: {XSD_FILE}'}), 500
 
     try:
-        # Load XSD Schema once
+        # Load XSD Schema
         xsd_doc = etree.parse(XSD_FILE)
         schema = etree.XMLSchema(xsd_doc)
         
@@ -58,8 +76,12 @@ def process_file():
 
         results = {
             'success': [],
-            'errors': []
+            'errors': [],
+            'csv_report': None
         }
+
+        # Data structure to hold CSV rows
+        csv_data = []
 
         # Find all <trial> elements
         trials = xml_doc.findall('.//trial')
@@ -77,7 +99,7 @@ def process_file():
             
             filename = f"{safe_filename}.xml"
 
-            # --- CALLING THE FUNCTION FROM VALIDATOR.PY ---
+            # --- CALLING THE MODULARIZED FUNCTION FROM VALIDATOR.PY ---
             is_valid, doc_tree, error_log = validate_trial_element(trial, schema)
 
             if is_valid:
@@ -90,19 +112,45 @@ def process_file():
                     'file': filename
                 })
             else:
-                # Save to invalid folder
-                output_path = os.path.join(INVALID_FOLDER, filename)
+                # Get the first error message to categorize the folder
+                first_error = error_log[0] if error_log else None
+                error_reason = first_error.message if first_error else "Unknown Validation Error"
+                safe_error_folder = sanitize_folder_name(error_reason)
+                
+                # Create the specific error folder: processed/invalid/<error_reason>/
+                specific_invalid_folder = os.path.join(INVALID_FOLDER, safe_error_folder)
+                os.makedirs(specific_invalid_folder, exist_ok=True)
+                
+                # Save the invalid XML inside its specific category folder
+                output_path = os.path.join(specific_invalid_folder, filename)
                 doc_tree.write(output_path, pretty_print=True, encoding='utf-8')
                 
-                # Format error messages
-                # schema.error_log contains specific XSD validation errors
-                msgs = [f"Line {e.line}: {e.message}" for e in error_log]
+                # Format error messages for UI and append to CSV data
+                msgs = []
+                for e in error_log:
+                    msgs.append(f"Line {e.line}: {e.message}")
+                    # Prepare CSV row: [Trial ID, Line Number, Error Reason]
+                    csv_data.append([safe_filename, e.line, e.message])
                 
                 results['errors'].append({
                     'id': safe_filename,
                     'file': filename,
+                    'folder': f"invalid/{safe_error_folder}",
                     'reasons': msgs
                 })
+
+        # Generate CSV if there are any errors
+        if csv_data:
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            csv_filename = f"error_report_{timestamp}.csv"
+            csv_filepath = os.path.join(PROCESSED_FOLDER, csv_filename)
+            
+            with open(csv_filepath, mode='w', newline='', encoding='utf-8') as f:
+                writer = csv.writer(f)
+                writer.writerow(['Trial ID', 'Line Number', 'Error Reason'])
+                writer.writerows(csv_data)
+            
+            results['csv_report'] = csv_filename
 
         return jsonify(results)
 
