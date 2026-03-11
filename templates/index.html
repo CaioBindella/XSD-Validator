@@ -44,6 +44,10 @@
     <div class="tab-content mt-3" id="resultsTabContent">
         
         <div class="tab-pane fade show active" id="success-pane" role="tabpanel">
+            <div id="zip-download-container" class="text-end mb-3" style="display: none;">
+                <a id="zip-download-btn" href="/download_success" class="btn btn-success fw-bold">⬇️ Download Valid Trials (ZIP)</a>
+            </div>
+
             <div class="table-responsive">
                 <table class="table table-hover table-striped">
                     <thead>
@@ -61,8 +65,9 @@
         </div>
 
         <div class="tab-pane fade" id="error-pane" role="tabpanel">
-            <div id="csv-download-container" class="text-end mb-3" style="display: none;">
-                <a id="csv-download-btn" href="#" class="btn btn-warning fw-bold">⬇️ Download CSV Error Report</a>
+            <div id="invalid-downloads-container" class="text-end mb-3" style="display: none;">
+                <a id="csv-download-btn" href="#" class="btn btn-warning fw-bold me-2">⬇️ Download CSV Only</a>
+                <a id="zip-invalid-download-btn" href="/download_invalid" class="btn btn-danger fw-bold">⬇️ Download All Invalid (ZIP)</a>
             </div>
 
             <div id="list-error">
@@ -89,7 +94,8 @@
         spinner.style.display = 'inline-block';
         document.getElementById('list-success').innerHTML = '';
         document.getElementById('list-error').innerHTML = '';
-        document.getElementById('csv-download-container').style.display = 'none';
+        document.getElementById('zip-download-container').style.display = 'none'; // Aba success
+        document.getElementById('invalid-downloads-container').style.display = 'none';
 
         const formData = new FormData();
         formData.append('file', file);
@@ -124,9 +130,13 @@
 
         // Populate Success Tab
         const tbodySuccess = document.getElementById('list-success');
+        const zipContainer = document.getElementById('zip-download-container'); // Nova referência
+        
         if (data.success.length === 0) {
             tbodySuccess.innerHTML = '<tr><td colspan="3" class="text-center">No valid trials found.</td></tr>';
+            zipContainer.style.display = 'none'; // Esconde se não houver válidos
         } else {
+            zipContainer.style.display = 'block'; // Mostra botão se houver válidos
             let html = '';
             data.success.forEach(item => {
                 html += `<tr>
@@ -140,17 +150,17 @@
 
         // Populate Error Tab
         const divError = document.getElementById('list-error');
-        const csvContainer = document.getElementById('csv-download-container');
+        const invalidContainer = document.getElementById('invalid-downloads-container'); // Nova referência
         const csvBtn = document.getElementById('csv-download-btn');
 
         if (data.errors.length === 0) {
             divError.innerHTML = '<p class="text-center text-success">Great! No validation errors found.</p>';
-            csvContainer.style.display = 'none';
+            invalidContainer.style.display = 'none';
         } else {
-            // Show CSV download button if a report was generated
+            // Show download buttons if a report was generated
             if (data.csv_report) {
                 csvBtn.href = '/download/' + data.csv_report;
-                csvContainer.style.display = 'block';
+                invalidContainer.style.display = 'block';
             }
 
             let html = '';

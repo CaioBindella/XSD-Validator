@@ -2,6 +2,8 @@ import os
 import shutil
 import csv
 import re
+import io
+import zipfile
 from datetime import datetime
 from flask import Flask, render_template, request, jsonify, send_from_directory
 from lxml import etree
@@ -158,6 +160,46 @@ def process_file():
         return jsonify({'error': f'XML Syntax Error in uploaded file: {str(e)}'}), 400
     except Exception as e:
         return jsonify({'error': f'Unexpected Error: {str(e)}'}), 500
+    
+@app.route('/download_success')
+def download_success():
+    """Route to download all successful valid XMLs as a ZIP file."""
+    memory_file = io.BytesIO()
+    with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zf:
+        # Percorre a pasta SUCCESS_FOLDER e adiciona cada arquivo ao zip
+        for root, dirs, files in os.walk(SUCCESS_FOLDER):
+            for file in files:
+                file_path = os.path.join(root, file)
+                # Adiciona o arquivo usando apenas o nome dele, ignorando diretórios locais do servidor
+                zf.write(file_path, file)
+    
+    memory_file.seek(0)
+    return send_file(memory_file, download_name='valid_trials.zip', as_attachment=True)
+
+@app.route('/download_invalid')
+def download_invalid():
+    """Route to download all invalid XMLs and the CSV report as a ZIP file."""
+    memory_file = io.BytesIO()
+    with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zf:
+        
+        # 1. Adicionar os arquivos XML inválidos (mantendo a estrutura de subpastas dos erros)
+        for root, dirs, files in os.walk(INVALID_FOLDER):
+            for file in files:
+                file_path = os.path.join(root, file)
+                # Cria um caminho relativo para manter as pastas categorizadas dentro do ZIP
+                # Colocamos tudo dentro de uma pasta base chamada "xmls_com_erro"
+                arcname = os.path.join('xmls_com_erro', os.path.relpath(file_path, INVALID_FOLDER))
+                zf.write(file_path, arcname)
+        
+        # 2. Procurar pelo relatório CSV na pasta de processados e adicionar à raiz do ZIP
+        for file in os.listdir(PROCESSED_FOLDER):
+            if file.endswith('.csv'):
+                file_path = os.path.join(PROCESSED_FOLDER, file)
+                # Salva o arquivo CSV solto na raiz do arquivo ZIP
+                zf.write(file_path, file)
+                
+    memory_file.seek(0)
+    return send_file(memory_file, download_name='invalid_trials_and_report.zip', as_attachment=True)
 
 if __name__ == '__main__':
     print("Server running! Open http://127.0.0.1:5000 in your browser.")
