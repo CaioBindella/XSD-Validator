@@ -5,7 +5,7 @@ import re
 import io
 import zipfile
 from datetime import datetime
-from flask import Flask, render_template, request, jsonify, send_from_directory
+from flask import Flask, render_template, request, jsonify, send_from_directory, send_file
 from lxml import etree
 
 # Import the validation logic from your module
@@ -26,10 +26,10 @@ for folder in [UPLOAD_FOLDER, PROCESSED_FOLDER, SUCCESS_FOLDER, INVALID_FOLDER]:
 
 def clean_processing_folders():
     """Clears the output folders before a new validation run."""
-    for folder in [SUCCESS_FOLDER, INVALID_FOLDER]:
-        if os.path.exists(folder):
-            shutil.rmtree(folder)
-            os.makedirs(folder)
+    for pasta in [SUCCESS_FOLDER, INVALID_FOLDER]:
+        if os.path.exists(pasta):
+            shutil.rmtree(pasta)
+            os.makedirs(pasta)
 
 def sanitize_folder_name(name):
     """Sanitizes the error reason to create a valid OS directory name."""
@@ -96,7 +96,7 @@ def process_file():
             try:
                 trial_id = trial.find('.//trial_id').text
                 safe_filename = "".join([c for c in trial_id if c.isalpha() or c.isdigit() or c in ('-','_')]).rstrip()
-            except:
+            except Exception:
                 safe_filename = f"unknown_trial_{i+1}"
             
             filename = f"{safe_filename}.xml"
@@ -167,7 +167,7 @@ def download_success():
     memory_file = io.BytesIO()
     with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zf:
         # Percorre a pasta SUCCESS_FOLDER e adiciona cada arquivo ao zip
-        for root, dirs, files in os.walk(SUCCESS_FOLDER):
+        for root, _, files in os.walk(SUCCESS_FOLDER):
             for file in files:
                 file_path = os.path.join(root, file)
                 # Adiciona o arquivo usando apenas o nome dele, ignorando diretórios locais do servidor
@@ -183,7 +183,7 @@ def download_invalid():
     with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zf:
         
         # 1. Adicionar os arquivos XML inválidos (mantendo a estrutura de subpastas dos erros)
-        for root, dirs, files in os.walk(INVALID_FOLDER):
+        for root, _, files in os.walk(INVALID_FOLDER):
             for file in files:
                 file_path = os.path.join(root, file)
                 # Cria um caminho relativo para manter as pastas categorizadas dentro do ZIP
