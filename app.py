@@ -39,6 +39,29 @@ def sanitize_folder_name(name):
     safe_name = safe_name.replace('\n', ' ').replace('\r', '')
     return safe_name[:80].strip()
 
+def enhance_error_message(msg, trial_element=None):
+    """Intercepts native lxml messages and adds dynamic explanatory tips in English."""
+    
+    match = re.search(r"Element '([^']+)': This element is not expected\. Expected is \( ([^ ]+) \)", msg)
+    
+    if match:
+        tag_found = match.group(1)
+        tag_expected = match.group(2)
+        
+        if trial_element is not None:
+            # Encontra todas as ocorrências desta tag dentro do XML do trial atual
+            ocorrencias = trial_element.findall(f".//{tag_found}")
+            if len(ocorrencias) > 1:
+                return (f"Duplicated Tag: The tag &lt;{tag_found}&gt; is duplicated. "
+                        f"It can only appear once in this block. "
+                        f"[TIP: Remove the extra &lt;{tag_found}&gt; tag.]")
+        
+        return (f"Missing or Misplaced Tag: The system required the tag &lt;{tag_expected}&gt; "
+                f"in this position, but found &lt;{tag_found}&gt;. "
+                f"[TIP: Check if you deleted the &lt;{tag_expected}&gt; tag or placed it in the wrong order.]")
+    
+    return msg
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -130,9 +153,12 @@ def process_file():
                 # Format error messages for UI and append to CSV data
                 msgs = []
                 for e in error_log:
-                    msgs.append(f"Line {e.line}: {e.message}")
+                    # Passar a mensagem original pela nossa função melhoradora
+                    better_msg = enhance_error_message(e.message, trial)
+                    
+                    msgs.append(f"Line {e.line}: {better_msg}")
                     # Prepare CSV row: [Trial ID, Line Number, Error Reason]
-                    csv_data.append([safe_filename, e.line, e.message])
+                    csv_data.append([safe_filename, e.line, better_msg])
                 
                 results['errors'].append({
                     'id': safe_filename,
