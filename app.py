@@ -2,8 +2,10 @@ import os
 import shutil
 import csv
 import re
+import io
+import zipfile
 from datetime import datetime
-from flask import Flask, render_template, request, jsonify, send_from_directory
+from flask import Flask, render_template, request, jsonify, send_from_directory, send_file
 from lxml import etree
 
 # Import the validation logic from your module
@@ -24,10 +26,10 @@ for folder in [UPLOAD_FOLDER, PROCESSED_FOLDER, SUCCESS_FOLDER, INVALID_FOLDER]:
 
 def clean_processing_folders():
     """Clears the output folders before a new validation run."""
-    for folder in [SUCCESS_FOLDER, INVALID_FOLDER]:
-        if os.path.exists(folder):
-            shutil.rmtree(folder)
-            os.makedirs(folder)
+    for pasta in [SUCCESS_FOLDER, INVALID_FOLDER]:
+        if os.path.exists(pasta):
+            shutil.rmtree(pasta)
+            os.makedirs(pasta)
 
 def sanitize_folder_name(name):
     """Sanitizes the error reason to create a valid OS directory name."""
@@ -36,6 +38,29 @@ def sanitize_folder_name(name):
     # Remove newlines and limit to 80 characters to avoid OS path length issues
     safe_name = safe_name.replace('\n', ' ').replace('\r', '')
     return safe_name[:80].strip()
+
+def enhance_error_message(msg, trial_element=None):
+    """Intercepts native lxml messages and adds dynamic explanatory tips in English."""
+    
+    match = re.search(r"Element '([^']+)': This element is not expected\. Expected is \( ([^ ]+) \)", msg)
+    
+    if match:
+        tag_found = match.group(1)
+        tag_expected = match.group(2)
+        
+        if trial_element is not None:
+            # Encontra todas as ocorrências desta tag dentro do XML do trial atual
+            ocorrencias = trial_element.findall(f".//{tag_found}")
+            if len(ocorrencias) > 1:
+                return (f"Duplicated Tag: The tag &lt;{tag_found}&gt; is duplicated. "
+                        f"It can only appear once in this block. "
+                        f"[TIP: Remove the extra &lt;{tag_found}&gt; tag.]")
+        
+        return (f"Missing or Misplaced Tag: The system required the tag &lt;{tag_expected}&gt; "
+                f"in this position, but found &lt;{tag_found}&gt;. "
+                f"[TIP: Check if you deleted the &lt;{tag_expected}&gt; tag or placed it in the wrong order.]")
+    
+    return msg
 
 @app.route('/')
 def index():
@@ -94,7 +119,7 @@ def process_file():
             try:
                 trial_id = trial.find('.//trial_id').text
                 safe_filename = "".join([c for c in trial_id if c.isalpha() or c.isdigit() or c in ('-','_')]).rstrip()
-            except:
+            except Exception:
                 safe_filename = f"unknown_trial_{i+1}"
             
             filename = f"{safe_filename}.xml"
@@ -128,9 +153,12 @@ def process_file():
                 # Format error messages for UI and append to CSV data
                 msgs = []
                 for e in error_log:
-                    msgs.append(f"Line {e.line}: {e.message}")
+                    # Passar a mensagem original pela nossa função melhoradora
+                    better_msg = enhance_error_message(e.message, trial)
+                    
+                    msgs.append(f"Line {e.line}: {better_msg}")
                     # Prepare CSV row: [Trial ID, Line Number, Error Reason]
-                    csv_data.append([safe_filename, e.line, e.message])
+                    csv_data.append([safe_filename, e.line, better_msg])
                 
                 results['errors'].append({
                     'id': safe_filename,
@@ -158,6 +186,46 @@ def process_file():
         return jsonify({'error': f'XML Syntax Error in uploaded file: {str(e)}'}), 400
     except Exception as e:
         return jsonify({'error': f'Unexpected Error: {str(e)}'}), 500
+    
+@app.route('/download_success')
+def download_success():
+    """Route to download all successful valid XMLs as a ZIP file."""
+    memory_file = io.BytesIO()
+    with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zf:
+        # Percorre a pasta SUCCESS_FOLDER e adiciona cada arquivo ao zip
+        for root, _, files in os.walk(SUCCESS_FOLDER):
+            for file in files:
+                file_path = os.path.join(root, file)
+                # Adiciona o arquivo usando apenas o nome dele, ignorando diretórios locais do servidor
+                zf.write(file_path, file)
+    
+    memory_file.seek(0)
+    return send_file(memory_file, download_name='valid_trials.zip', as_attachment=True)
+
+@app.route('/download_invalid')
+def download_invalid():
+    """Route to download all invalid XMLs and the CSV report as a ZIP file."""
+    memory_file = io.BytesIO()
+    with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zf:
+        
+        # 1. Adicionar os arquivos XML inválidos (mantendo a estrutura de subpastas dos erros)
+        for root, _, files in os.walk(INVALID_FOLDER):
+            for file in files:
+                file_path = os.path.join(root, file)
+                # Cria um caminho relativo para manter as pastas categorizadas dentro do ZIP
+                # Colocamos tudo dentro de uma pasta base chamada "xmls_com_erro"
+                arcname = os.path.join('xmls_com_erro', os.path.relpath(file_path, INVALID_FOLDER))
+                zf.write(file_path, arcname)
+        
+        # 2. Procurar pelo relatório CSV na pasta de processados e adicionar à raiz do ZIP
+        for file in os.listdir(PROCESSED_FOLDER):
+            if file.endswith('.csv'):
+                file_path = os.path.join(PROCESSED_FOLDER, file)
+                # Salva o arquivo CSV solto na raiz do arquivo ZIP
+                zf.write(file_path, file)
+                
+    memory_file.seek(0)
+    return send_file(memory_file, download_name='invalid_trials_and_report.zip', as_attachment=True)
 
 if __name__ == '__main__':
     print("Server running! Open http://127.0.0.1:5000 in your browser.")
