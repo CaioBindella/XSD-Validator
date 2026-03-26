@@ -124,7 +124,21 @@ def process_file():
             
             filename = f"{safe_filename}.xml"
 
-            # --- CALLING THE MODULARIZED FUNCTION FROM VALIDATOR.PY ---
+            TRUNCATE_FIELDS = {
+                'hc_freetext': 3000,
+                'i_freetext': 3000,
+                'inclusion_criteria': 4000,
+                'exclusion_criteria': 4000
+            }
+            
+            trial_warnings = []
+            for tag, max_len in TRUNCATE_FIELDS.items():
+                element = trial.find(f".//{tag}")
+                if element is not None and element.text and len(element.text) > max_len:
+                    # Corta o texto para o tamanho máximo permitido
+                    element.text = element.text[:max_len]
+                    trial_warnings.append(f"Warning: The &lt;{tag}&gt; tag exceeded the limit and was truncated to {max_len} characters.")
+
             is_valid, doc_tree, error_log = validate_trial_element(trial, schema)
 
             if is_valid:
@@ -134,7 +148,8 @@ def process_file():
                 
                 results['success'].append({
                     'id': safe_filename,
-                    'file': filename
+                    'file': filename,
+                    'warnings': trial_warnings # Envia os avisos para o frontend
                 })
             else:
                 # Get the first error message to categorize the folder

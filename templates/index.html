@@ -130,42 +130,64 @@
 
         // Populate Success Tab
         const tbodySuccess = document.getElementById('list-success');
-        const zipContainer = document.getElementById('zip-download-container'); // Nova referência
         
+        // Oculta/Mostra botão ZIP se ele existir
+        const zipContainer = document.getElementById('zip-download-container');
+        if (zipContainer) {
+            zipContainer.style.display = data.success.length === 0 ? 'none' : 'block';
+        }
+
         if (data.success.length === 0) {
-            tbodySuccess.innerHTML = '<tr><td colspan="3" class="text-center">No valid trials found.</td></tr>';
-            zipContainer.style.display = 'none'; // Esconde se não houver válidos
+            tbodySuccess.innerHTML = '<tr><td colspan="3" class="text-center text-muted">No valid trials found.</td></tr>';
         } else {
-            zipContainer.style.display = 'block'; // Mostra botão se houver válidos
             let html = '';
             data.success.forEach(item => {
-                html += `<tr>
-                    <td>${item.id}</td>
-                    <td>${item.file}</td>
-                    <td><span class="badge bg-success">Valid</span></td>
-                </tr>`;
+                // truncate warnings for display
+                if (item.warnings && item.warnings.length > 0) {
+                    let warningsList = item.warnings.map(w => `<li>${w}</li>`).join('');
+                    
+                    // Layout Amarelo (Aviso)
+                    html += `<tr class="table-warning">
+                        <td class="align-middle"><strong>${item.id}</strong></td>
+                        <td>
+                            ${item.file}
+                            <div class="mt-2 text-dark">
+                                <strong>⚠️ Warning - Truncated Fields:</strong>
+                                <ul class="mb-0" style="font-size: 0.85em; color: #856404;">
+                                    ${warningsList}
+                                </ul>
+                            </div>
+                        </td>
+                        <td class="align-middle"><span class="badge bg-success text-dark">Valid (Truncated)</span></td>
+                    </tr>`;
+                } else {
+                    html += `<tr>
+                        <td class="align-middle">${item.id}</td>
+                        <td class="align-middle">${item.file}</td>
+                        <td class="align-middle"><span class="badge bg-success">Valid</span></td>
+                    </tr>`;
+                }
             });
             tbodySuccess.innerHTML = html;
         }
 
         // Populate Error Tab
         const divError = document.getElementById('list-error');
-        const invalidContainer = document.getElementById('invalid-downloads-container'); // Nova referência
+        const csvContainer = document.getElementById('csv-download-container');
         const csvBtn = document.getElementById('csv-download-btn');
 
         if (data.errors.length === 0) {
             divError.innerHTML = '<p class="text-center text-success">Great! No validation errors found.</p>';
-            invalidContainer.style.display = 'none';
+            if (csvContainer) csvContainer.style.display = 'none';
         } else {
-            // Show download buttons if a report was generated
-            if (data.csv_report) {
+            // Show CSV download button if a report was generated
+            if (data.csv_report && csvContainer) {
                 csvBtn.href = '/download/' + data.csv_report;
-                invalidContainer.style.display = 'block';
+                csvContainer.style.display = 'block';
             }
 
             let html = '';
             data.errors.forEach(item => {
-                // Create list items for each error reason
                 let reasonsList = item.reasons.map(r => `<li>${r}</li>`).join('');
                 
                 html += `

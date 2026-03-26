@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-<xs:simpleType name="str10">
+  <xs:simpleType name="str10">
     <xs:restriction base="xs:string"><xs:maxLength value="10"/></xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="str50">
@@ -21,6 +21,12 @@
   </xs:simpleType>
   <xs:simpleType name="str2000">
     <xs:restriction base="xs:string"><xs:maxLength value="2000"/></xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="str3000">
+    <xs:restriction base="xs:string"><xs:maxLength value="3000"/></xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="str4000">
+    <xs:restriction base="xs:string"><xs:maxLength value="4000"/></xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="str8000">
     <xs:restriction base="xs:string"><xs:maxLength value="8000"/></xs:restriction>
@@ -72,8 +78,8 @@
       <xs:element name="study_type" type="str255"/>
       <xs:element name="study_design" type="str1000"/>
       <xs:element name="phase" type="str255"/>
-      <xs:element name="hc_freetext" type="str8000" minOccurs="0"/>
-      <xs:element name="i_freetext" type="str8000" minOccurs="0"/>
+      <xs:element name="hc_freetext" type="str3000" minOccurs="0"/>
+      <xs:element name="i_freetext" type="str3000" minOccurs="0"/>
       <xs:element name="results_actual_enrolment" type="str255"/>
       <xs:element name="results_date_completed" type="str10"/>
       <xs:element name="results_url_link" type="str255"/>
@@ -120,11 +126,11 @@
 
   <xs:complexType name="criteriaType">
     <xs:sequence>
-      <xs:element name="inclusion_criteria" type="str8000"/>
+      <xs:element name="inclusion_criteria" type="str4000"/>
       <xs:element name="agemin" type="str50"/>
       <xs:element name="agemax" type="str50"/>
       <xs:element name="gender" type="str50"/>
-      <xs:element name="exclusion_criteria" type="str8000"/>
+      <xs:element name="exclusion_criteria" type="str4000"/>
     </xs:sequence>
   </xs:complexType>
 
