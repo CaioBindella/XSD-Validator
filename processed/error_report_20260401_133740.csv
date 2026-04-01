@@ -1,0 +1,2 @@
+Trial ID,Line Number,Error Reason
+RBR-2t3s88z,31,Element 'results_summary': [facet 'maxLength'] The value has a length of '2565'; this exceeds the allowed maximum length of '512'.

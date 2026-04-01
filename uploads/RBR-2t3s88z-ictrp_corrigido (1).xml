@@ -1,0 +1,194 @@
+<?xml version="1.0"?>
+<root>
+  <trials>
+    <trial>
+      <main>
+        <trial_id>RBR-2t3s88z</trial_id>
+        <utrn>U1111-1274-6528</utrn>
+        <reg_name>REBEC</reg_name>
+        <date_registration>15/09/2025</date_registration>
+        <primary_sponsor>Faculdade de Medicina de Ribeirão Preto da Universidade de São Paulo</primary_sponsor>
+        <public_title>Comparison of cost and quality of life in the treatment of varicose veins by normal surgery and by radiofrequency treatment at Hospital de Américo Brasiliense (SUS)</public_title>
+        <acronym> </acronym>
+        <scientific_title>Cost-Effectiveness and Quality of Life Study of Safena Magna Treatment by Radiofrequency Ablation and Conventional Surgery at Hospital Estadual de Américo Brasiliense (SUS)</scientific_title>
+        <scientific_acronym> </scientific_acronym>
+        <date_enrolment>18/09/2020</date_enrolment>
+        <type_enrolment>actual</type_enrolment>
+        <target_size>120</target_size>
+        <recruitment_status>Data analysis completed</recruitment_status>
+        <url>https://ensaiosclinicos.gov.br/rg/RBR-2t3s88z</url>
+        <study_type>Intervention</study_type>
+        <study_design>n/a, randomized-controlled, open</study_design>
+        <phase>N/A</phase>
+        <hc_freetext>varicose veins</hc_freetext>
+        <i_freetext>This is a prospective, single-center clinical study focused on two parallel groups.
+Experimental group: 60 lower limbs with clinical indication for interventional treatment of the great saphenous vein due to venous reflux, who underwent treatment of saphenous vein reflux with endovenous radiofrequency thermoablation.
+Control group: 60 lower limbs with clinical indication for interventional treatment of the great saphenous vein due to venous reflux, who underwent treatment of saphenous vein reflux with conventional surgery (saphenectomy).
+The interventional procedures (saphenectomy or radiofrequency) were performed in a single session (only one intervention) in the morning, with the patient fasting and under spinal anesthesia.</i_freetext>
+        <results_actual_enrolment/>
+        <results_date_completed>30/04/2025</results_date_completed>
+        <results_url_link/>
+        <results_summary>Introduction: Chronic venous disease (CVD) is a prevalent condition that significantly impacts the healthcare system, incurring both direct (treatment) and indirect (work absenteeism) costs. Various treatment techniques are employed, including saphenectomy (SFN), used in the Brazilian public health system (SUS), and minimally invasive techniques such as radiofrequency ablation (RFA). Health Technology Assessment (HTA) aims to maximize health benefits within financial constraints, particularly those associated with new technologies. Economic evaluations, such as cost-effectiveness studies, are essential criteria for decisions regarding technology incorporation.
+
+Objective: To compare SFN and RFA in terms of clinical outcomes, quality of life, and cost-effectiveness.
+
+Methods: A prospective, randomized clinical trial with two groups was conducted in an outpatient hospital setting under spinal anesthesia. Patients were evaluated preoperatively and 30 days postoperatively. Clinical outcomes were assessed using CVD-specific questionnaires: the Aberdeen Varicose Vein Questionnaire (AVVQ) and the Chronic Lower Limb Venous Insufficiency Questionnaire (CIVIQ). Direct costs were calculated individually using micro- and macro-costing methods. The cost-effectiveness analysis, based on clinical outcomes and a decision tree model, included the calculation of the Cost-Effectiveness Ratio (CER) and the Incremental Cost-Effectiveness Ratio (ICER).
+
+Results: A total of 116 patients (58 per group) underwent surgery, with success rates of 100% for SFN and 96.6% for RFA. Complications were infrequent (15.5%) and mild. Surgical time was significantly shorter in the RFA group (91.4 ± 34 vs. 126 ± 42 minutes; p = 0.0422), but its cost was higher due to material expenses, being 64% more expensive. Both groups showed improved quality of life, with no statistically significant difference favoring RFA in the AVVQ (19.2 ± 9.5 vs. 16.2 ± 9.6; 95% CI: [-0.93; 6.65]) and CIVIQ (18.1 ± 21.7 vs. 11.4 ± 18.0; 95% CI: [-1.13; 14.36]) scores for SFN and RFA, respectively. Neither technique dominated the other; however, SFN proved more cost-effective, albeit with similar CER values for AVVQ (R$ 320.73 vs. R$ 360.86) and CIVIQ (R$ 152.35 vs. R$ 167.32) for SFN and RFA, respectively. The ICER values were R$ 197.79 per additional unit of effect for CIVIQ and R$ 456.61 for the AVVQ questionnaire.
+
+Conclusion: This study represents an initial experience in incorporating a new technology within the SUS, demonstrating that SFN remains more cost-effective than RFA.</results_summary>
+        <results_date_posted/>
+        <results_date_first_publication/>
+        <results_baseline_char>The mean patient age was 53 ± 12 years in the saphenectomy (SFN) group and 54 ± 12 years in the radiofrequency ablation (RFA) group, with no significant difference between groups (p = 0.78).
+Regarding sex distribution, 69% (n = 40) of patients in the SFN group and 72% (n = 42) in the RFA group were female, also with no significant difference (p = 0.84).
+The mean body mass index (BMI) was 29 ± 5 kg/m² in both groups, with no significant difference (p = 0.45).
+Regarding comorbidities, hypertension prevalence was 36% (n = 21) in the SFN group and 40% (n = 23) in the RFA group (p = 0.70). The prevalence of diabetes mellitus was identical in both groups (16%, n = 9), as was hypercholesterolemia (16%, n = 9 in the SFN group and 14%, n = 8 in the RFA group), with no significant differences (p &gt; 0.99 for both). Smoking was reported by 7% (n = 4) of patients in the SFN group and 9% (n = 5) in the RFA group, also with no significant difference (p &gt; 0.99).
+Regarding the CEAP classification of chronic venous disease severity, most patients were classified as C2 and C3 (72%, n = 42 in the SFN group and 74%, n = 43 in the RFA group), with no significant difference between groups (p = 0.93). Stages C4 to C6 were observed in 28% (n = 16) and 26% (n = 15) of patients, respectively. Bilateral limb surgery was reported in 21% (n = 12) of patients in the SFN group and 22% (n = 13) in the RFA group, with no significant difference (p &gt; 0.99).
+Regarding baseline scores, the initial AVVQ was 24.9 ± 12 in the SFN group and 24.5 ± 13 in the RFA group, with no significant difference (p = 0.86). The initial CIVIQ was 30,1 ± 23 in the SFN group and 29,4 ± 23 in the RFA group, also with no significant difference (p = 0.87).</results_baseline_char>
+        <results_participant_flow>Initially, 188 patients with an indication for varicose vein surgery due to great saphenous vein reflux were evaluated at the outpatient clinic of Hospital Estadual de Américo Brasiliense between 2018 and 2024. Of these, 44 patients met predefined exclusion criteria. Consequently, 144 eligible patients were enrolled and sequentially randomized, with 72 allocated to each study group.
+Following randomization, 23 patients did not undergo surgery due to various reasons (withdrawal of consent or non-response to scheduling attempts). Thus, 121 patients proceeded to surgery. However, five of these patients were lost to follow-up or did not complete the postoperative quality-of-life questionnaires.
+The final analysis included 116 patients (141 limbs) who completed the entire follow-up protocol and adequately responded to all quality-of-life assessments. The final distribution was 58 patients per study group (70 limbs SFN and 71 limbs RFA).</results_participant_flow>
+        <results_adverse_events>The procedural success rate was 100% (58/58) in the SFN group. In the RFA group, the success rate was slightly lower at 96.6% (56/58).
+
+The SFN group exhibited an 8.6% (5/58) incidence of surgical site infection or wound dehiscence, whereas no such cases were observed in the RFA group.
+
+Paresthesia was reported by 5.2% (3/58) of patients in the SFN group, with no occurrences in the RFA group.
+
+Superficial Venous Thrombosis (SVT) was diagnosed in symptomatic patients via ultrasonographic visualization of thrombosed residual varicose veins in 3.4% (2/58) of the SFN group and 6.9% (4/58) of the RFA group.
+
+Deep Vein Thrombosis (DVT) occurred in only two patients (one in each group), representing 1.7% (1/58) per group. Both cases were distal thromboses affecting calf muscle veins, detected on the 30-day control ultrasound.
+
+In the RFA group, 5.2% (3/58) of patients exhibited Endothermal Heat-Induced Thrombosis (EHIT), a method-specific complication, detected on the seven-day postoperative ultrasound.
+
+The aggregate rate of Venous Thromboembolic Events (VTE)—comprising all superficial, deep, and heat-induced thrombotic events—was 5.2% (3/58) in the SFN group and 13.8% (8/58) in the RFA group. The overall complication rate was 17.2% (10/58) in the SFN group and 13.8% (8/58) in the RFA group.</results_adverse_events>
+        <results_outcome_measures>PRIMARY OUTCOMES
+No significant difference was observed between RFA and SFN. For the AVVQ, the mean score at 30 days was 19.2 ± 9.5 in the SFN group and 16.2 ± 9.6 in the RFA group, with a mean difference of 2.84 (95% CI: [-0.93; 6.65]). For the CIVIQ, the mean scores were 18.1 ± 21.7 (SFN) and 11.4 ± 18.0 (RFA), with a mean difference of 6.7 (95% CI: [-1.13; 14.36]).
+
+The results reveal a consistent pattern across both questionnaires (CIVIQ and AVVQ), where SFN demonstrates a lower CER (Cost-Effectiveness Ratio), indicating greater economic efficiency. For CIVIQ, the CER was R$ 152.35 for SFN compared to R$ 167.32 for RFA, while for AVVQ the values were R$ 320.73 and R$ 360.86, respectively. Although modest, this difference—9% for CIVIQ and 11.1% for AVVQ—suggests that SFN is superior, providing a better cost-benefit ratio.
+The calculated ICER (Incremental Cost-Effectiveness Ratio) for CIVIQ was R$ 197.79 per additional unit of effect, while for AVVQ it was R$ 456.61.
+
+SECONDARY OUTCOMES
+When analyzing the final direct cost, SFN showed a significantly lower value (R$ 1,815.70 ± 629.1) compared to RFA (R$ 2,990.40 ± 549.4), representing a cost reduction of R$ 1,176.50 (95% CI: [-1388.4; -964.8]).
+
+The success rate was 100% (58/58) in the SFN group. In the RFA group, the rate was slightly lower (96.6%; 56/58), though this difference was not statistically significant (p = 0.04).</results_outcome_measures>
+        <results_url_protocol/>
+        <results_IPD_plan>No</results_IPD_plan>
+        <results_IPD_description/>
+      </main>
+      <contacts>
+        <contact>
+          <type>public</type>
+          <firstname>Guilherme</firstname>
+          <middlename/>
+          <lastname>Garcia</lastname>
+          <address>Avenida Bandeirantes, 3.900 – 9º andar – Monte Alegre</address>
+          <city>Ribeirão Preto</city>
+          <country1>BR</country1>
+          <zip>14048-900</zip>
+          <telephone>+5519981013181</telephone>
+          <email>gnobregarcia@yahoo.com.br</email>
+          <affiliation>Faculdade de Medicina de Ribeirão Preto da USP</affiliation>
+        </contact>
+        <contact>
+          <type>scientific</type>
+          <firstname>Mauricio</firstname>
+          <middlename/>
+          <lastname>Ribeiro</lastname>
+          <address>Avenida Bandeirantes, 3.900 – 9º andar – Monte Alegre</address>
+          <city>Ribeirão Preto</city>
+          <country1>BR</country1>
+          <zip>14048-900</zip>
+          <telephone>+551636022998</telephone>
+          <email>mribeiro@fmrp.usp.br</email>
+          <affiliation>Faculdade de Medicina de Ribeirão Preto da USP</affiliation>
+        </contact>
+      </contacts>
+      <countries>
+        <country2>BR</country2>
+      </countries>
+      <criteria>
+        <inclusion_criteria>Symptomatic lower limb varicose veins; age over 18 and under 80; presence of total or partial reflux of the great saphenous vein of one or both or limbs, detected on duplex ultrasound with indication for surgical treatment</inclusion_criteria>
+        <agemin>18Y</agemin>
+        <agemax>80Y</agemax>
+        <gender>-</gender>
+        <exclusion_criteria>Significant underlying diseases in activity such as cancer, lupus, tuberculosis; infectious disease (infected ulcers); history of clotting disorders (thrombophilia); history of thromboembolic events (deep vein thrombosis); use of anticoagulant or antiplatelet medication; pregnancy; high cardiovascular risk</exclusion_criteria>
+      </criteria>
+      <health_condition_code>
+        <hc_code>c14</hc_code>
+      </health_condition_code>
+      <health_condition_keyword>
+        <hc_keyword>Cardiovascular Diseases</hc_keyword>
+      </health_condition_keyword>
+      <intervention_code>
+        <i_code/>
+      </intervention_code>
+      <intervention_keyword>
+        <i_keyword>E04.014.760; E04.100.814</i_keyword>
+        <i_keyword>E04.100.814</i_keyword>
+      </intervention_keyword>
+      <primary_outcome>
+        <prim_outcome>Expected Primary Outcome 1
+
+An analysis of the change in quality of life, as measured by the application of pre-operative and 30-day post-operative quality of life questionnaires, is expected to demonstrate a more favorable change in the radiofrequency ablation group compared to the saphenectomy group across all studied questionnaires.
+
+An improvement in the quality of life score exceeding 8 points in the quality of life questionnaires is anticipated.</prim_outcome>
+        <prim_outcome>Primary Outcome 1 Findings
+
+Analysis of the change in quality of life, as measured by pre-operative and 30-day post-operative quality of life questionnaires, revealed a more favorable change for the radiofrequency ablation group compared to the saphenectomy group across all questionnaires studied.
+
+However, the magnitude of the improvement in quality of life was 2,8 points on the AVVQ questionnaire and 6,7 points on the CIVIQ questionnaire, values which were not statistically significant.</prim_outcome>
+        <prim_outcome>Expected Primary Outcome 2
+
+To compare the cost-effectiveness — assessed via the cost-effectiveness ratio (CER) and the incremental cost-effectiveness ratio (ICER) — of saphenectomy and radiofrequency ablation. The direct cost of the procedures will be used as the cost input, while the change in quality of life, as measured by the Chronic Venous Insufficiency Questionnaire (CIVIQ) and the Aberdeen Varicose Vein Questionnaire (AVVQ), will serve as the measure of effect.
+
+It is anticipated that both the CER and ICER will indicate the superior cost-effectiveness of radiofrequency ablation compared to saphenectomy.</prim_outcome>
+        <prim_outcome>Primary Outcome 2 Findings
+
+The cost-effectiveness of saphenectomy and radiofrequency ablation was compared using the cost-effectiveness ratio (CER) and incremental cost-effectiveness ratio (ICER). The analysis utilized the direct cost of procedures as the cost measure and the change in quality of life scores from both the Chronic Venous Insufficiency Questionnaire (CIVIQ) and Aberdeen Varicose Vein Questionnaire (AVVQ) as the effectiveness measure.
+The analysis revealed higher CER values for radiofrequency ablation in both questionnaires (11.1% for AVVQ and 9% for CIVIQ), indicating that radiofrequency ablation was less cost-effective than saphenectomy.
+Additionally, ICER values of R$ 456.61 for AVVQ and R$ 197.79  for CIVIQ were obtained. These values represent the additional cost required to gain one extra unit of quality of life when using radiofrequency ablation compared to saphenectomy.</prim_outcome>
+      </primary_outcome>
+      <secondary_outcome>
+        <sec_outcome>Expected Secondary Outcome 1
+
+Upon analyzing the treatment efficacy for the great saphenous vein using both techniques, as assessed by Doppler ultrasonography, an equivalent level of efficacy is expected between the two groups.</sec_outcome>
+        <sec_outcome>Secondary Outcome 1 Findings
+
+Analysis of treatment efficacy for the great saphenous vein using both techniques, as assessed by Doppler ultrasound, revealed an equivalent success rate between the two groups. Surgical saphenectomy demonstrated a 100% success rate, while radiofrequency ablation showed a 96.6% success rate.</sec_outcome>
+        <sec_outcome>Expected Secondary Outcome 2
+
+Analysis of the direct costs of the procedures and their early complications – using microcosting and macro-costing techniques with data from the cost center of the Hospital Estadual de Américo Brasiliense – is expected to demonstrate higher direct costs for radiofrequency ablation compared to saphenectomy.</sec_outcome>
+        <sec_outcome>Secondary Outcome 2 Findings
+
+An analysis of the direct costs of the procedures and their early complications—using microcosting and macro-costing techniques with data from the cost center of the Hospital Estadual de Américo Brasiliense—revealed that the direct cost of radiofrequency ablation was 64% higher than that of saphenectomy.</sec_outcome>
+      </secondary_outcome>
+      <secondary_sponsor>
+        <sponsor_name>Faculdade de Medicina de Ribeirão Preto da Universidade de São Paulo</sponsor_name>
+      </secondary_sponsor>
+      <secondary_ids>
+        <secondary_id>
+          <sec_id>36626620.4.0000.5440</sec_id>
+          <issuing_authority>Plataforma Brasil</issuing_authority>
+        </secondary_id>
+        <secondary_id>
+          <sec_id>4.220.140</sec_id>
+          <issuing_authority>Comitê de ética e pequisa do Hospital das Clínicas da Faculdade de Medicina de Ribeirão Preto da Universidade de São Paulo</issuing_authority>
+        </secondary_id>
+      </secondary_ids>
+      <source_support>
+        <source_name>Fundação de amparo a pesquisa do estado de São Paulo</source_name>
+        <source_name>Fundação de Apoio ao Ensino, Pesquisa e Assistência do Hospital das Clínicas da Faculdade de Medicina de Ribeirão Preto da Universidade de São Paulo (FAEPA)</source_name>
+      </source_support>
+      <ethics_reviews>
+        <ethics_review>
+          <status>Approved</status>
+          <approval_date>18/08/2020</approval_date>
+          <contact_name>Comitê de Ética em Pesquisa</contact_name>
+          <contact_address>Av. Bandeirantes, 3900 - Campus Universitário</contact_address>
+          <contact_phone>+55(16)36331144</contact_phone>
+          <contact_email>cep@hcrp.usp.br</contact_email>
+        </ethics_review>
+      </ethics_reviews>
+    </trial>
+  </trials>
+</root>

@@ -1,0 +1,106 @@
+:root {
+    --who-blue-top: #005a9c;
+    --who-blue-nav: #003b73;
+    --who-blue-overlay: #15355e;
+    --who-text-gray: #333333;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f8f9fa;
+    color: var(--who-text-gray);
+}
+
+/* Header / Logo Area */
+.header-area {
+    background-color: white;
+    padding: 20px 0;
+    border-bottom: 4px solid var(--who-blue-top);
+}
+
+.logo-icon {
+    color: var(--who-blue-top);
+}
+
+.logo-text {
+    line-height: 1.1;
+    color: var(--who-blue-top);
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    height: 300px; /* Reduzido um pouco já que o header está mais limpo */
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 40px;
+}
+
+.hero-title-box {
+    background-color: var(--who-blue-overlay);
+    color: white;
+    padding: 10px 20px;
+    display: inline-block;
+}
+
+.hero-title-box h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+
+/* Main Content Container */
+.validator-container {
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-top: -30px; /* Sobrepõe levemente a imagem de fundo */
+    position: relative;
+    z-index: 10;
+    margin-bottom: 50px;
+}
+
+/* Instructions */
+.instructions-box {
+    background-color: #f1f6f9;
+    border-left: 5px solid var(--who-blue-nav);
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 0 4px 4px 0;
+}
+
+.info-icon {
+    color: var(--who-blue-nav);
+}
+
+/* Custom Elements */
+.error-log { 
+    font-size: 0.9em; 
+    color: #dc3545; 
+}
+
+.spinner-border { 
+    display: none; 
+}
+
+.btn-who {
+    background-color: var(--who-blue-nav);
+    color: white;
+}
+
+.btn-who:hover {
+    background-color: var(--who-blue-top);
+    color: white;
+}
+
+.success-tab-btn {
+    color: #198754 !important;
+}
+
+.error-tab-btn {
+    color: #dc3545 !important;
+}

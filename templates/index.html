@@ -3,211 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WHO ICTRP Validator</title>
+    <title>WHO ICTRP - Clinical Trials Validator</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body { padding-top: 40px; background-color: #f8f9fa; }
-        .container { max-width: 900px; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
-        .error-log { font-size: 0.9em; color: #dc3545; }
-        .spinner-border { display: none; }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-<div class="container">
-    <h2 class="text-center mb-4">Clinical Trials Validator (XSD)</h2>
-    
-    <div class="card p-4 mb-4">
-        <label for="xmlFile" class="form-label">Select Monthly XML File:</label>
-        <div class="input-group">
-            <input type="file" class="form-control" id="xmlFile" accept=".xml">
-            <button class="btn btn-primary" type="button" onclick="uploadAndProcess()">
-                <span class="spinner-border spinner-border-sm" id="loadingSpinner" role="status" aria-hidden="true"></span>
-                Run Validation
-            </button>
+    <header class="header-area container-fluid px-4">
+        <div class="d-flex align-items-center">
+            <i class="bi bi-globe-americas fs-1 me-2 logo-icon"></i>
+            <div class="logo-text">
+                <span class="fs-4 fw-bold d-block">World Health</span>
+                <span class="fs-4 fw-bold d-block">Organization</span>
+            </div>
         </div>
-    </div>
+    </header>
 
-    <ul class="nav nav-tabs" id="resultsTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="success-tab" data-bs-toggle="tab" data-bs-target="#success-pane" type="button" role="tab">
-                Success <span id="count-success" class="badge bg-success">0</span>
-            </button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="error-tab" data-bs-toggle="tab" data-bs-target="#error-pane" type="button" role="tab">
-                Invalid <span id="count-error" class="badge bg-danger">0</span>
-            </button>
-        </li>
-    </ul>
+    <section class="hero-section px-4">
+        <div class="container-fluid">
+            <div class="hero-title-box">
+                <h1>International Clinical Trials Registry Platform</h1>
+            </div>
+            <br>
+            <div class="hero-title-box mt-1">
+                <h1>(ICTRP)</h1>
+            </div>
+        </div>
+    </section>
 
-    <div class="tab-content mt-3" id="resultsTabContent">
+    <main class="container validator-container">
+        <h2 class="mb-4 text-dark fw-bold">Clinical Trials XML Validator (XSD)</h2>
         
-        <div class="tab-pane fade show active" id="success-pane" role="tabpanel">
-            <div id="zip-download-container" class="text-end mb-3" style="display: none;">
-                <a id="zip-download-btn" href="/download_success" class="btn btn-success fw-bold">⬇️ Download Valid Trials (ZIP)</a>
-            </div>
-
-            <div class="table-responsive">
-                <table class="table table-hover table-striped">
-                    <thead>
-                        <tr>
-                            <th>Trial ID</th>
-                            <th>Generated File</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="list-success">
-                        <tr><td colspan="3" class="text-center text-muted">No results yet.</td></tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="instructions-box shadow-sm">
+            <h5 class="fw-bold mb-3"><i class="bi bi-info-circle-fill me-2 info-icon"></i>How to use this validator</h5>
+            <ol class="mb-0">
+                <li class="mb-1"><strong>Select your file:</strong> Click the "Choose File" button below to upload your monthly clinical trials XML export.</li>
+                <li class="mb-1"><strong>Run Validation:</strong> Click "Run Validation" to process the data against the current ICTRP XML Schema Definition (XSD).</li>
+                <li class="mb-1"><strong>Review Results:</strong> Valid trials will appear in the "Success" tab, while structural errors or missing data will be detailed in the "Invalid" tab.</li>
+                <li><strong>Download Reports:</strong> Use the download buttons provided after validation to export valid XML subsets or error logs (CSV/ZIP).</li>
+            </ol>
         </div>
-
-        <div class="tab-pane fade" id="error-pane" role="tabpanel">
-            <div id="invalid-downloads-container" class="text-end mb-3" style="display: none;">
-                <a id="csv-download-btn" href="#" class="btn btn-warning fw-bold me-2">⬇️ Download CSV Only</a>
-                <a id="zip-invalid-download-btn" href="/download_invalid" class="btn btn-danger fw-bold">⬇️ Download All Invalid (ZIP)</a>
-            </div>
-
-            <div id="list-error">
-                <p class="text-center text-muted">No errors found yet.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<script>
-    async function uploadAndProcess() {
-        const fileInput = document.getElementById('xmlFile');
-        const file = fileInput.files[0];
-        const spinner = document.getElementById('loadingSpinner');
-
-        if (!file) {
-            alert("Please select a file first.");
-            return;
-        }
-
-        // UI Reset
-        spinner.style.display = 'inline-block';
-        document.getElementById('list-success').innerHTML = '';
-        document.getElementById('list-error').innerHTML = '';
-        document.getElementById('zip-download-container').style.display = 'none'; // Aba success
-        document.getElementById('invalid-downloads-container').style.display = 'none';
-
-        const formData = new FormData();
-        formData.append('file', file);
-
-        try {
-            const response = await fetch('/process', {
-                method: 'POST',
-                body: formData
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                alert("Error: " + data.error);
-                return;
-            }
-
-            updateInterface(data);
-
-        } catch (error) {
-            console.error('Network Error:', error);
-            alert("A network error occurred while connecting to the server.");
-        } finally {
-            spinner.style.display = 'none';
-        }
-    }
-
-    function updateInterface(data) {
-        // Update counters
-        document.getElementById('count-success').innerText = data.success.length;
-        document.getElementById('count-error').innerText = data.errors.length;
-
-        // Populate Success Tab
-        const tbodySuccess = document.getElementById('list-success');
         
-        // Oculta/Mostra botão ZIP se ele existir
-        const zipContainer = document.getElementById('zip-download-container');
-        if (zipContainer) {
-            zipContainer.style.display = data.success.length === 0 ? 'none' : 'block';
-        }
+        <div class="card p-4 mb-5 border-0 bg-light shadow-sm">
+            <label for="xmlFile" class="form-label fw-bold text-dark">Select Monthly XML File:</label>
+            <div class="input-group">
+                <input type="file" class="form-control border-secondary" id="xmlFile" accept=".xml">
+                <button class="btn btn-who px-4 fw-bold" type="button" onclick="uploadAndProcess()">
+                    <span class="spinner-border spinner-border-sm me-2" id="loadingSpinner" role="status" aria-hidden="true"></span>
+                    Run Validation
+                </button>
+            </div>
+        </div>
 
-        if (data.success.length === 0) {
-            tbodySuccess.innerHTML = '<tr><td colspan="3" class="text-center text-muted">No valid trials found.</td></tr>';
-        } else {
-            let html = '';
-            data.success.forEach(item => {
-                // truncate warnings for display
-                if (item.warnings && item.warnings.length > 0) {
-                    let warningsList = item.warnings.map(w => `<li>${w}</li>`).join('');
-                    
-                    // Layout Amarelo (Aviso)
-                    html += `<tr class="table-warning">
-                        <td class="align-middle"><strong>${item.id}</strong></td>
-                        <td>
-                            ${item.file}
-                            <div class="mt-2 text-dark">
-                                <strong>⚠️ Warning - Truncated Fields:</strong>
-                                <ul class="mb-0" style="font-size: 0.85em; color: #856404;">
-                                    ${warningsList}
-                                </ul>
-                            </div>
-                        </td>
-                        <td class="align-middle"><span class="badge bg-success text-dark">Valid (Truncated)</span></td>
-                    </tr>`;
-                } else {
-                    html += `<tr>
-                        <td class="align-middle">${item.id}</td>
-                        <td class="align-middle">${item.file}</td>
-                        <td class="align-middle"><span class="badge bg-success">Valid</span></td>
-                    </tr>`;
-                }
-            });
-            tbodySuccess.innerHTML = html;
-        }
+        <ul class="nav nav-tabs" id="resultsTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active fw-bold success-tab-btn" id="success-tab" data-bs-toggle="tab" data-bs-target="#success-pane" type="button" role="tab">
+                    <i class="bi bi-check-circle-fill me-1"></i> Success <span id="count-success" class="badge bg-success ms-1">0</span>
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link fw-bold error-tab-btn" id="error-tab" data-bs-toggle="tab" data-bs-target="#error-pane" type="button" role="tab">
+                    <i class="bi bi-x-circle-fill me-1"></i> Invalid <span id="count-error" class="badge bg-danger ms-1">0</span>
+                </button>
+            </li>
+        </ul>
 
-        // Populate Error Tab
-        const divError = document.getElementById('list-error');
-        const csvContainer = document.getElementById('csv-download-container');
-        const csvBtn = document.getElementById('csv-download-btn');
+        <div class="tab-content mt-4" id="resultsTabContent">
+            
+            <div class="tab-pane fade show active" id="success-pane" role="tabpanel">
+                <div id="zip-download-container" class="text-end mb-3" style="display: none;">
+                    <a id="zip-download-btn" href="/download_success" class="btn btn-success fw-bold"><i class="bi bi-file-earmark-zip me-1"></i> Download Valid Trials (ZIP)</a>
+                </div>
 
-        if (data.errors.length === 0) {
-            divError.innerHTML = '<p class="text-center text-success">Great! No validation errors found.</p>';
-            if (csvContainer) csvContainer.style.display = 'none';
-        } else {
-            // Show CSV download button if a report was generated
-            if (data.csv_report && csvContainer) {
-                csvBtn.href = '/download/' + data.csv_report;
-                csvContainer.style.display = 'block';
-            }
+                <div class="table-responsive border rounded bg-white">
+                    <table class="table table-hover table-striped mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Trial ID</th>
+                                <th>Generated File</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="list-success">
+                            <tr><td colspan="3" class="text-center text-muted py-4">No results yet. Please upload a file to begin validation.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-            let html = '';
-            data.errors.forEach(item => {
-                let reasonsList = item.reasons.map(r => `<li>${r}</li>`).join('');
-                
-                html += `
-                <div class="card mb-3 border-danger">
-                    <div class="card-header bg-danger text-white d-flex justify-content-between">
-                        <span>Trial ID: <strong>${item.id}</strong></span>
-                        <span style="font-size: 0.9em; opacity: 0.9;">Path: ${item.folder}</span>
-                    </div>
-                    <div class="card-body">
-                        <h6 class="card-title">Validation Errors:</h6>
-                        <ul class="error-log mb-0">
-                            ${reasonsList}
-                        </ul>
-                    </div>
-                </div>`;
-            });
-            divError.innerHTML = html;
-        }
-    }
-</script>
+            <div class="tab-pane fade" id="error-pane" role="tabpanel">
+                <div id="invalid-downloads-container" class="text-end mb-3" style="display: none;">
+                    <a id="csv-download-btn" href="#" class="btn btn-warning fw-bold text-dark me-2"><i class="bi bi-filetype-csv me-1"></i> Download Error Report (CSV)</a>
+                    <a id="zip-invalid-download-btn" href="/download_invalid" class="btn btn-danger fw-bold"><i class="bi bi-file-earmark-zip me-1"></i> Download All Invalid (ZIP)</a>
+                </div>
 
+                <div id="list-error">
+                    <p class="text-center text-muted py-4">No errors found yet.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
