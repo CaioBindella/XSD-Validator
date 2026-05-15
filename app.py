@@ -1,47 +1,40 @@
 import os
-import shutil
 import csv
 import re
 import io
-import zipfile
 from datetime import datetime
 from flask import Flask, render_template, request, jsonify, send_from_directory, send_file
 from lxml import etree
 
-# Import the validation logic from your module
 from validator import validate_trial_element
 
 app = Flask(__name__)
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 # Configuration
 UPLOAD_FOLDER = 'uploads'
 PROCESSED_FOLDER = 'processed'
-SUCCESS_FOLDER = os.path.join(PROCESSED_FOLDER, 'success')
-INVALID_FOLDER = os.path.join(PROCESSED_FOLDER, 'invalid')
 XSD_FILE = 'who_ictrp.xsd'
 
-# Ensure directories exist
-for folder in [UPLOAD_FOLDER, PROCESSED_FOLDER, SUCCESS_FOLDER, INVALID_FOLDER]:
+# Ensure base directories exist
+for folder in [UPLOAD_FOLDER, PROCESSED_FOLDER]:
     os.makedirs(folder, exist_ok=True)
 
-def clean_processing_folders():
-    """Clears the output folders before a new validation run."""
-    for pasta in [SUCCESS_FOLDER, INVALID_FOLDER]:
-        if os.path.exists(pasta):
-            shutil.rmtree(pasta)
-            os.makedirs(pasta)
+def clean_old_csvs():
+    """Remove arquivos CSV antigos para não acumular no servidor."""
+    if os.path.exists(PROCESSED_FOLDER):
+        for file in os.listdir(PROCESSED_FOLDER):
+            if file.endswith('.csv'):
+                os.remove(os.path.join(PROCESSED_FOLDER, file))
 
 def sanitize_folder_name(name):
-    """Sanitizes the error reason to create a valid OS directory name."""
-    # Remove invalid characters for folders (\ / * ? : " < > |)
+    """Sanitizes the error reason."""
     safe_name = re.sub(r'[\\/*?:"<>|]', "", name)
-    # Remove newlines and limit to 80 characters to avoid OS path length issues
     safe_name = safe_name.replace('\n', ' ').replace('\r', '')
     return safe_name[:80].strip()
 
 def enhance_error_message(msg, trial_element=None):
     """Intercepts native lxml messages and adds dynamic explanatory tips in English."""
-    
     match = re.search(r"Element '([^']+)': This element is not expected\. Expected is \( ([^ ]+) \)", msg)
     
     if match:
@@ -49,7 +42,6 @@ def enhance_error_message(msg, trial_element=None):
         tag_expected = match.group(2)
         
         if trial_element is not None:
-            # Encontra todas as ocorrências desta tag dentro do XML do trial atual
             ocorrencias = trial_element.findall(f".//{tag_found}")
             if len(ocorrencias) > 1:
                 return (f"Duplicated Tag: The tag &lt;{tag_found}&gt; is duplicated. "
@@ -80,24 +72,21 @@ def process_file():
     if file.filename == '':
         return jsonify({'error': 'Empty filename'}), 400
 
-    # Save uploaded file temporarily
+    # Save uploaded file temporarily for processing
     file_path = os.path.join(UPLOAD_FOLDER, file.filename)
     file.save(file_path)
 
-    # Check if XSD exists
     if not os.path.exists(XSD_FILE):
         return jsonify({'error': f'XSD file not found: {XSD_FILE}'}), 500
 
     try:
-        # Load XSD Schema
         xsd_doc = etree.parse(XSD_FILE)
         schema = etree.XMLSchema(xsd_doc)
         
-        # Load the large XML file
         xml_doc = etree.parse(file_path)
         
-        # Clean old results
-        clean_processing_folders()
+        # Limpa relatórios antigos da memória/disco
+        clean_old_csvs()
 
         results = {
             'success': [],
@@ -105,17 +94,14 @@ def process_file():
             'csv_report': None
         }
 
-        # Data structure to hold CSV rows
         csv_data = []
-
-        # Find all <trial> elements
-        trials = xml_doc.findall('.//trial')
-
-        if not trials:
+        trials = xml_doc.xpath("//*[translate(local-name(), 'TRIAL', 'trial')='trial']")
+        
+        if not trials: 
              return jsonify({'error': 'No <trial> elements found in the XML.'}), 400
 
         for i, trial in enumerate(trials):
-            # Extract ID for filename (sanitize it)
+            trial.tag = 'trial'
             try:
                 trial_id = trial.find('.//trial_id').text
                 safe_filename = "".join([c for c in trial_id if c.isalpha() or c.isdigit() or c in ('-','_')]).rstrip()
@@ -128,53 +114,90 @@ def process_file():
                 'hc_freetext': 3000,
                 'i_freetext': 3000,
                 'inclusion_criteria': 4000,
-                'exclusion_criteria': 4000
+                'exclusion_criteria': 4000,
+                'prim_outcome': 8000,
+                'sec_outcome': 8000,
+                'results_IPD_description': 2000,
+                'address': 250,
+                'lastname': 50,
+                'agemax': 50,
+                'results_summary': 4000,
+                'results_outcome_measures': 8000
             }
             
             trial_warnings = []
+            
             for tag, max_len in TRUNCATE_FIELDS.items():
-                element = trial.find(f".//{tag}")
-                if element is not None and element.text and len(element.text) > max_len:
-                    # Corta o texto para o tamanho máximo permitido
-                    element.text = element.text[:max_len]
-                    trial_warnings.append(f"Warning: The &lt;{tag}&gt; tag exceeded the limit and was truncated to {max_len} characters.")
+                for element in trial.findall(f".//{tag}"):
+                    if element is not None and element.text and len(element.text) > max_len:
+                        # Define o ponto de corte. Ex: Se limite é 50, corta em 45 para sobrar espaço pros '...'
+                        cut_point = 45 if max_len == 50 else (max_len - 3)
+                        
+                        # Efetua o corte e adiciona os 3 pontinhos
+                        element.text = element.text[:cut_point] + "..."
+                        
+                        trial_warnings.append(f"Warning: The &lt;{tag}&gt; tag exceeded the allowed limit. It will be truncated at {cut_point} characters...")
 
+            # --- Regra 7: Campo source_support com múltiplos source_name ---
+            source_support_node = trial.find('.//source_support')
+            if source_support_node is not None:
+                # Verifica se existem múltiplos source_name
+                sources = source_support_node.findall('source_name')
+                if len(sources) > 1:
+                    trial_warnings.append("Warning: Multiple &lt;source_name&gt; tags found under &lt;source_support&gt;. The ICTRP imports this correctly, but please verify if this is intended.")
+
+            # --- Correção de múltiplos países (Ex: Sri Lanka) ---
+            countries_node = trial.find('.//countries')
+            if countries_node is not None:
+                for country_elem in countries_node.findall('country2'):
+                    if country_elem.text and ',' in country_elem.text:
+                        country_list = [c.strip() for c in country_elem.text.split(',') if c.strip()]
+                        
+                        if len(country_list) > 1:
+                            for c_name in country_list:
+                                new_c = etree.Element('country2')
+                                new_c.text = c_name[:50]
+                                country_elem.addprevious(new_c)
+                            
+                            countries_node.remove(country_elem)
+                            trial_warnings.append("Warning: Multiple countries sent in a single &lt;country2&gt; tag. They will be separated automatically. Correct behavior: use a separate tag for each country.")
+            
+            date_fields_to_strip = [
+                'date_registration',
+                'results_date_posted',
+                'results_date_completed',
+                'results_date_first_publication'
+            ]
+            
+            for date_tag in date_fields_to_strip:
+                date_node = trial.find(f'.//{date_tag}')
+                if date_node is not None and date_node.text:
+                    stripped_date = date_node.text.strip()
+                    if date_node.text != stripped_date:
+                        date_node.text = stripped_date
+                        trial_warnings.append(f"Warning: The &lt;{date_tag}&gt; tag contained leading or trailing whitespace. The spaces were automatically ignored for import, but please correct the formatting in your source file.")
+            
             is_valid, doc_tree, error_log = validate_trial_element(trial, schema)
 
             if is_valid:
-                # Save to success folder
-                output_path = os.path.join(SUCCESS_FOLDER, filename)
-                doc_tree.write(output_path, pretty_print=True, encoding='utf-8')
-                
+                # O XML válido não é mais salvo no disco, apenas listado no retorno
                 results['success'].append({
                     'id': safe_filename,
                     'file': filename,
-                    'warnings': trial_warnings # Envia os avisos para o frontend
+                    'warnings': trial_warnings
                 })
             else:
-                # Get the first error message to categorize the folder
                 first_error = error_log[0] if error_log else None
                 error_reason = first_error.message if first_error else "Unknown Validation Error"
                 safe_error_folder = sanitize_folder_name(error_reason)
                 
-                # Create the specific error folder: processed/invalid/<error_reason>/
-                specific_invalid_folder = os.path.join(INVALID_FOLDER, safe_error_folder)
-                os.makedirs(specific_invalid_folder, exist_ok=True)
-                
-                # Save the invalid XML inside its specific category folder
-                output_path = os.path.join(specific_invalid_folder, filename)
-                doc_tree.write(output_path, pretty_print=True, encoding='utf-8')
-                
-                # Format error messages for UI and append to CSV data
                 msgs = []
                 for e in error_log:
-                    # Passar a mensagem original pela nossa função melhoradora
                     better_msg = enhance_error_message(e.message, trial)
-                    
                     msgs.append(f"Line {e.line}: {better_msg}")
-                    # Prepare CSV row: [Trial ID, Line Number, Error Reason]
                     csv_data.append([safe_filename, e.line, better_msg])
                 
+                # O XML inválido também não é mais salvo no disco
                 results['errors'].append({
                     'id': safe_filename,
                     'file': filename,
@@ -182,7 +205,7 @@ def process_file():
                     'reasons': msgs
                 })
 
-        # Generate CSV if there are any errors
+        # Generate CSV se houver erros (é um arquivo de texto muito leve, seguro de manter até a próxima validação)
         if csv_data:
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             csv_filename = f"error_report_{timestamp}.csv"
@@ -202,46 +225,11 @@ def process_file():
     except Exception as e:
         return jsonify({'error': f'Unexpected Error: {str(e)}'}), 500
     
-@app.route('/download_success')
-def download_success():
-    """Route to download all successful valid XMLs as a ZIP file."""
-    memory_file = io.BytesIO()
-    with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zf:
-        # Percorre a pasta SUCCESS_FOLDER e adiciona cada arquivo ao zip
-        for root, _, files in os.walk(SUCCESS_FOLDER):
-            for file in files:
-                file_path = os.path.join(root, file)
-                # Adiciona o arquivo usando apenas o nome dele, ignorando diretórios locais do servidor
-                zf.write(file_path, file)
-    
-    memory_file.seek(0)
-    return send_file(memory_file, download_name='valid_trials.zip', as_attachment=True)
-
-@app.route('/download_invalid')
-def download_invalid():
-    """Route to download all invalid XMLs and the CSV report as a ZIP file."""
-    memory_file = io.BytesIO()
-    with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zf:
-        
-        # 1. Adicionar os arquivos XML inválidos (mantendo a estrutura de subpastas dos erros)
-        for root, _, files in os.walk(INVALID_FOLDER):
-            for file in files:
-                file_path = os.path.join(root, file)
-                # Cria um caminho relativo para manter as pastas categorizadas dentro do ZIP
-                # Colocamos tudo dentro de uma pasta base chamada "xmls_com_erro"
-                arcname = os.path.join('xmls_com_erro', os.path.relpath(file_path, INVALID_FOLDER))
-                zf.write(file_path, arcname)
-        
-        # 2. Procurar pelo relatório CSV na pasta de processados e adicionar à raiz do ZIP
-        for file in os.listdir(PROCESSED_FOLDER):
-            if file.endswith('.csv'):
-                file_path = os.path.join(PROCESSED_FOLDER, file)
-                # Salva o arquivo CSV solto na raiz do arquivo ZIP
-                zf.write(file_path, file)
-                
-    memory_file.seek(0)
-    return send_file(memory_file, download_name='invalid_trials_and_report.zip', as_attachment=True)
+    finally:
+        # Garante que o arquivo XML pesado enviado pelo usuário será deletado no fim do processo
+        if os.path.exists(file_path):
+            os.remove(file_path)
 
 if __name__ == '__main__':
     print("Server running! Open http://127.0.0.1:5000 in your browser.")
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)

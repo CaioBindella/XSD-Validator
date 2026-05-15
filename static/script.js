@@ -12,7 +12,6 @@ async function uploadAndProcess() {
     spinner.style.display = 'inline-block';
     document.getElementById('list-success').innerHTML = '';
     document.getElementById('list-error').innerHTML = '';
-    document.getElementById('zip-download-container').style.display = 'none'; 
     document.getElementById('invalid-downloads-container').style.display = 'none';
 
     const formData = new FormData();
@@ -48,12 +47,7 @@ function updateInterface(data) {
 
     // Popula a Aba de Sucesso
     const tbodySuccess = document.getElementById('list-success');
-    const zipContainer = document.getElementById('zip-download-container');
     
-    if (zipContainer) {
-        zipContainer.style.display = data.success.length === 0 ? 'none' : 'block';
-    }
-
     if (data.success.length === 0) {
         tbodySuccess.innerHTML = '<tr><td colspan="3" class="text-center text-muted py-4">No valid trials found.</td></tr>';
     } else {
