@@ -53,7 +53,7 @@
               <xs:element name="secondary_outcome" type="secondaryOutcomeType"/>
               <xs:element name="secondary_sponsor" type="secondarySponsorType"/>
               <xs:element name="secondary_ids" type="secondaryIdsType"/>
-              <xs:element name="source_support" type="sourceSupportType"/>
+              <xs:element name="source_support" type="sourceSupportType" maxOccurs="unbounded"/>
               <xs:element name="ethics_reviews" type="ethicsReviewsType"/>
             </xs:sequence>
           </xs:complexType>

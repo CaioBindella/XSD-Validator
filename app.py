@@ -122,7 +122,12 @@ def process_file():
                 'lastname': 50,
                 'agemax': 50,
                 'results_summary': 4000,
-                'results_outcome_measures': 8000
+                'results_outcome_measures': 8000,
+                'hc_keyword': 500,
+                'firstname': 50,
+                'target_size': 255,
+                'results_url_link': 255,
+                'contact_name': 512,
             }
             
             trial_warnings = []
@@ -144,8 +149,7 @@ def process_file():
                 # Verifica se existem múltiplos source_name
                 sources = source_support_node.findall('source_name')
                 if len(sources) > 1:
-                    trial_warnings.append("Warning: Multiple &lt;source_name&gt; tags found under &lt;source_support&gt;. The ICTRP imports this correctly, but please verify if this is intended.")
-
+                    trial_warnings.append("Warning: Multiple &lt;source_name&gt; tags found under a single &lt;source_support&gt;. The ICTRP imports this correctly, but please verify if this is intended.")
             # --- Correção de múltiplos países (Ex: Sri Lanka) ---
             countries_node = trial.find('.//countries')
             if countries_node is not None:
