@@ -143,19 +143,12 @@ def process_file():
                         
                         trial_warnings.append(f"Warning: The &lt;{tag}&gt; tag exceeded the allowed limit. It will be truncated at {cut_point} characters...")
 
-            # --- Regra 7: Campo source_support com múltiplos source_name ---
-            source_support_node = trial.find('.//source_support')
-            if source_support_node is not None:
-                # Verifica se existem múltiplos source_name
-                sources = source_support_node.findall('source_name')
-                if len(sources) > 1:
-                    trial_warnings.append("Warning: Multiple &lt;source_name&gt; tags found under a single &lt;source_support&gt;. The ICTRP imports this correctly, but please verify if this is intended.")
-            # --- Correção de múltiplos países (Ex: Sri Lanka) ---
+           # --- Correção de múltiplos países (Ex: Sri Lanka) ---
             countries_node = trial.find('.//countries')
             if countries_node is not None:
                 for country_elem in countries_node.findall('country2'):
                     if country_elem.text and ',' in country_elem.text:
-                        country_list = [c.strip() for c in country_elem.text.split(',') if c.strip()]
+                        country_list = [c.strip() for c in country_elem.text.split(';') if c.strip()]
                         
                         if len(country_list) > 1:
                             for c_name in country_list:
