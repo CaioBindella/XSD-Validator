@@ -11,6 +11,10 @@ body {
     color: var(--who-text-gray);
 }
 
+.warning-tab-btn {
+    color: #b58500 !important; /* Um tom de laranja/mostarda para destacar */
+}
+
 /* Header / Logo Area */
 .header-area {
     background-color: white;

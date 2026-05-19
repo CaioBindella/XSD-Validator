@@ -91,10 +91,12 @@ def process_file():
         results = {
             'success': [],
             'errors': [],
-            'csv_report': None
+            'csv_report': None,
+            'csv_warning_report': None
         }
 
         csv_data = []
+        warning_csv_data = []
         trials = xml_doc.xpath("//*[translate(local-name(), 'TRIAL', 'trial')='trial']")
         
         if not trials: 
@@ -183,6 +185,9 @@ def process_file():
                     'file': filename,
                     'warnings': trial_warnings
                 })
+
+                for w in trial_warnings:
+                    warning_csv_data.append([safe_filename, w])
             else:
                 first_error = error_log[0] if error_log else None
                 error_reason = first_error.message if first_error else "Unknown Validation Error"
@@ -202,9 +207,11 @@ def process_file():
                     'reasons': msgs
                 })
 
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
         # Generate CSV se houver erros (é um arquivo de texto muito leve, seguro de manter até a próxima validação)
         if csv_data:
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            
             csv_filename = f"error_report_{timestamp}.csv"
             csv_filepath = os.path.join(PROCESSED_FOLDER, csv_filename)
             
@@ -214,6 +221,17 @@ def process_file():
                 writer.writerows(csv_data)
             
             results['csv_report'] = csv_filename
+
+        if warning_csv_data:
+            warning_csv_filename = f"warning_report_{timestamp}.csv"
+            warning_csv_filepath = os.path.join(PROCESSED_FOLDER, warning_csv_filename)
+            
+            with open(warning_csv_filepath, mode='w', newline='', encoding='utf-8') as f:
+                writer = csv.writer(f)
+                writer.writerow(['Trial ID', 'Warning Message'])
+                writer.writerows(warning_csv_data)
+            
+            results['csv_warning_report'] = warning_csv_filename
 
         return jsonify(results)
 

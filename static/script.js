@@ -11,8 +11,10 @@ async function uploadAndProcess() {
     // Reset da Interface
     spinner.style.display = 'inline-block';
     document.getElementById('list-success').innerHTML = '';
+    document.getElementById('list-warning').innerHTML = '';
     document.getElementById('list-error').innerHTML = '';
     document.getElementById('invalid-downloads-container').style.display = 'none';
+    document.getElementById('warning-downloads-container').style.display = 'none';
 
     const formData = new FormData();
     formData.append('file', file);
@@ -45,17 +47,26 @@ function updateInterface(data) {
     document.getElementById('count-success').innerText = data.success.length;
     document.getElementById('count-error').innerText = data.errors.length;
 
-    // Popula a Aba de Sucesso
+    // Popula a Aba de Sucesso e a Aba de Warnings
     const tbodySuccess = document.getElementById('list-success');
+    const tbodyWarning = document.getElementById('list-warning');
+    const warningDownloadsContainer = document.getElementById('warning-downloads-container');
+    const csvWarningBtn = document.getElementById('csv-warning-download-btn');
     
+    let warningCount = 0;
+
     if (data.success.length === 0) {
         tbodySuccess.innerHTML = '<tr><td colspan="3" class="text-center text-muted py-4">No valid trials found.</td></tr>';
+        tbodyWarning.innerHTML = '<tr><td colspan="3" class="text-center text-muted py-4">No warnings found.</td></tr>';
     } else {
-        let html = '';
+        let htmlSuccess = '';
+        let htmlWarning = '';
+        
         data.success.forEach(item => {
             if (item.warnings && item.warnings.length > 0) {
+                // Monta o visual para a aba de Success (como já estava)
                 let warningsList = item.warnings.map(w => `<li>${w}</li>`).join('');
-                html += `<tr class="table-warning">
+                htmlSuccess += `<tr class="table-warning">
                     <td class="align-middle"><strong>${item.id}</strong></td>
                     <td>
                         ${item.file}
@@ -68,15 +79,44 @@ function updateInterface(data) {
                     </td>
                     <td class="align-middle"><span class="badge bg-success text-dark">Valid (Truncated)</span></td>
                 </tr>`;
+                
+                // --- NOVO: Monta o visual exclusivo para a nova aba Warnings ---
+                warningCount += 1;
+                htmlWarning += `<tr>
+                    <td class="align-middle fw-bold text-dark">${item.id}</td>
+                    <td class="align-middle">${item.file}</td>
+                    <td>
+                        <ul class="mb-0" style="font-size: 0.85em; color: #856404;">
+                            ${warningsList}
+                        </ul>
+                    </td>
+                </tr>`;
+                
             } else {
-                html += `<tr>
+                htmlSuccess += `<tr>
                     <td class="align-middle fw-bold text-dark">${item.id}</td>
                     <td class="align-middle">${item.file}</td>
                     <td class="align-middle"><span class="badge bg-success">Valid</span></td>
                 </tr>`;
             }
         });
-        tbodySuccess.innerHTML = html;
+        
+        tbodySuccess.innerHTML = htmlSuccess;
+        
+        // Atualiza a aba de Warning
+        document.getElementById('count-warning').innerText = warningCount;
+        
+        if (warningCount === 0) {
+            tbodyWarning.innerHTML = '<tr><td colspan="3" class="text-center text-success py-4"><i class="bi bi-check-circle-fill fs-4 d-block mb-2"></i> Great! No warnings found.</td></tr>';
+        } else {
+            tbodyWarning.innerHTML = htmlWarning;
+            
+            // Ativa o botão de download de CSV de Warning
+            if (data.csv_warning_report && warningDownloadsContainer) {
+                csvWarningBtn.href = '/download/' + data.csv_warning_report;
+                warningDownloadsContainer.style.display = 'block';
+            }
+        }
     }
 
     // Popula a Aba de Erros (Invalid)

@@ -62,6 +62,11 @@
                 </button>
             </li>
             <li class="nav-item" role="presentation">
+                <button class="nav-link fw-bold warning-tab-btn" id="warning-tab" data-bs-toggle="tab" data-bs-target="#warning-pane" type="button" role="tab">
+                    <i class="bi bi-exclamation-triangle-fill me-1"></i> Warnings <span id="count-warning" class="badge bg-warning text-dark ms-1">0</span>
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
                 <button class="nav-link fw-bold error-tab-btn" id="error-tab" data-bs-toggle="tab" data-bs-target="#error-pane" type="button" role="tab">
                     <i class="bi bi-x-circle-fill me-1"></i> Invalid <span id="count-error" class="badge bg-danger ms-1">0</span>
                 </button>
@@ -71,7 +76,6 @@
         <div class="tab-content mt-4" id="resultsTabContent">
             
             <div class="tab-pane fade show active" id="success-pane" role="tabpanel">
-
                 <div class="table-responsive border rounded bg-white">
                     <table class="table table-hover table-striped mb-0">
                         <thead class="table-light">
@@ -88,6 +92,29 @@
                 </div>
             </div>
 
+            <div class="tab-pane fade" id="warning-pane" role="tabpanel">
+                <div id="warning-downloads-container" class="text-end mb-3" style="display: none;">
+                    <a id="csv-warning-download-btn" href="#" class="btn btn-warning fw-bold text-dark me-2">
+                        <i class="bi bi-filetype-csv me-1"></i> Download Warning Report (CSV)
+                    </a>
+                </div>
+
+                <div class="table-responsive border rounded bg-white">
+                    <table class="table table-hover table-striped mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Trial ID</th>
+                                <th>Generated File</th>
+                                <th>Warnings</th>
+                            </tr>
+                        </thead>
+                        <tbody id="list-warning">
+                            <tr><td colspan="3" class="text-center text-muted py-4">No warnings found yet.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <div class="tab-pane fade" id="error-pane" role="tabpanel">
                 <div id="invalid-downloads-container" class="text-end mb-3" style="display: none;">
                     <a id="csv-download-btn" href="#" class="btn btn-warning fw-bold text-dark me-2"><i class="bi bi-filetype-csv me-1"></i> Download Error Report (CSV)</a>
@@ -97,6 +124,7 @@
                     <p class="text-center text-muted py-4">No errors found yet.</p>
                 </div>
             </div>
+
         </div>
     </main>
 
