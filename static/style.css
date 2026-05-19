@@ -37,7 +37,7 @@ body {
     background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1920&q=80');
     background-size: cover;
     background-position: center;
-    height: 300px; /* Reduzido um pouco já que o header está mais limpo */
+    height: 180px;
     display: flex;
     align-items: flex-end;
     padding-bottom: 40px;
