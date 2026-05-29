@@ -10,6 +10,9 @@ async function uploadAndProcess() {
 
     // Reset da Interface
     spinner.style.display = 'inline-block';
+    document.getElementById('count-success').innerText = '0';
+    document.getElementById('count-warning').innerText = '0'; 
+    document.getElementById('count-error').innerText = '0';
     document.getElementById('list-success').innerHTML = '';
     document.getElementById('list-warning').innerHTML = '';
     document.getElementById('list-error').innerHTML = '';
@@ -58,6 +61,8 @@ function updateInterface(data) {
     if (data.success.length === 0) {
         tbodySuccess.innerHTML = '<tr><td colspan="3" class="text-center text-muted py-4">No valid trials found.</td></tr>';
         tbodyWarning.innerHTML = '<tr><td colspan="3" class="text-center text-muted py-4">No warnings found.</td></tr>';
+
+        document.getElementById('count-warning').innerText = '0';
     } else {
         let htmlSuccess = '';
         let htmlWarning = '';

@@ -181,13 +181,13 @@ def process_file():
             if is_valid:
                 # O XML válido não é mais salvo no disco, apenas listado no retorno
                 results['success'].append({
-                    'id': safe_filename,
+                    'id': trial_id,
                     'file': filename,
                     'warnings': trial_warnings
                 })
 
                 for w in trial_warnings:
-                    warning_csv_data.append([safe_filename, w])
+                    warning_csv_data.append([trial_id, w])
             else:
                 first_error = error_log[0] if error_log else None
                 error_reason = first_error.message if first_error else "Unknown Validation Error"
@@ -197,11 +197,11 @@ def process_file():
                 for e in error_log:
                     better_msg = enhance_error_message(e.message, trial)
                     msgs.append(f"Line {e.line}: {better_msg}")
-                    csv_data.append([safe_filename, e.line, better_msg])
+                    csv_data.append([trial_id, e.line, better_msg])
                 
                 # O XML inválido também não é mais salvo no disco
                 results['errors'].append({
-                    'id': safe_filename,
+                    'id': trial_id,
                     'file': filename,
                     'folder': f"invalid/{safe_error_folder}",
                     'reasons': msgs
