@@ -148,6 +148,9 @@ def check_empty_fields(trial):
 
     def flag(tag, policy, line):
         """Registra a mensagem de erro ou aviso para um campo vazio."""
+        # Tag ausente não tem linha própria; usa a linha do <trial> como referência.
+        if line is None:
+            line = trial.sourceline
         if policy == 'error':
             errors.append((
                 line,
