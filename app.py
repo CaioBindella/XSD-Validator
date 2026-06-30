@@ -14,7 +14,7 @@ from lxml import etree
 from validator import validate_trial_element
 from config import UPLOAD_FOLDER, PROCESSED_FOLDER, XSD_FILE, ensure_base_folders
 from helpers import clean_old_csvs, sanitize_folder_name, enhance_error_message
-from trial_processor import preprocess_trial
+from trial_processor import preprocess_trial, check_empty_fields
 from reports import write_error_report, write_warning_report
 
 app = Flask(__name__)
@@ -97,9 +97,15 @@ def process_file():
 
             trial_warnings = preprocess_trial(trial)
 
+            # Aplica a política de campos vazios (EMPTY_FIELD_POLICY):
+            # campos vazios marcados como 'warning' viram avisos; os marcados
+            # como 'error' tornam o trial inválido.
+            policy_errors, policy_warnings = check_empty_fields(trial)
+            trial_warnings.extend(policy_warnings)
+
             is_valid, doc_tree, error_log = validate_trial_element(trial, schema)
 
-            if is_valid:
+            if is_valid and not policy_errors:
                 # O XML válido não é mais salvo no disco, apenas listado no retorno
                 results['success'].append({
                     'id': trial_id,
@@ -111,7 +117,9 @@ def process_file():
                     warning_csv_data.append([trial_id, w])
             else:
                 first_error = error_log[0] if error_log else None
-                error_reason = first_error.message if first_error else "Unknown Validation Error"
+                error_reason = first_error.message if first_error else (
+                    policy_errors[0][1] if policy_errors else "Unknown Validation Error"
+                )
                 safe_error_folder = sanitize_folder_name(error_reason)
 
                 msgs = []
@@ -119,6 +127,11 @@ def process_file():
                     better_msg = enhance_error_message(e.message, trial)
                     msgs.append(f"Line {e.line}: {better_msg}")
                     csv_data.append([trial_id, e.line, better_msg])
+
+                # Erros vindos da política de campos vazios obrigatórios
+                for line, better_msg in policy_errors:
+                    msgs.append(f"Line {line}: {better_msg}")
+                    csv_data.append([trial_id, line, better_msg])
 
                 # O XML inválido também não é mais salvo no disco
                 results['errors'].append({

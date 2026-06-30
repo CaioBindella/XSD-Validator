@@ -125,6 +125,63 @@ def fill_empty_containers(trial, trial_warnings):
                 trial_warnings.append(f"Warning: The container &lt;{parent_tag}&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.")
 
 
+def check_empty_fields(trial):
+    """Aplica a política de campos vazios (EMPTY_FIELD_POLICY) ao trial.
+
+    Um campo é considerado VAZIO em qualquer um destes três casos:
+      1. <tag> </tag>  -> presente, mas só com espaços/sem texto;
+      2. <tag/>        -> presente, mas autofechada;
+      3. ausente        -> a tag nem aparece no XML do trial.
+
+    Para cada campo vazio, decide o comportamento conforme a política:
+      - 'error'   -> adiciona à lista de erros (campo importante vazio);
+      - 'warning' -> adiciona à lista de avisos (vazio, mas não obrigatório);
+      - 'nothing' -> ignora (pode vir vazio sem problema).
+
+    Retorna uma tupla (errors, warnings), onde 'errors' é uma lista de
+    (linha, mensagem) e 'warnings' é uma lista de mensagens.
+    """
+    from field_rules import EMPTY_FIELD_POLICY
+
+    errors = []
+    warnings = []
+
+    def flag(tag, policy, line):
+        """Registra a mensagem de erro ou aviso para um campo vazio."""
+        if policy == 'error':
+            errors.append((
+                line,
+                f"Empty Required Field: The tag &lt;{tag}&gt; is empty but is required. "
+                f"[TIP: Fill in the &lt;{tag}&gt; field.]"
+            ))
+        elif policy == 'warning':
+            warnings.append(
+                f"Warning: The &lt;{tag}&gt; tag is empty. "
+                f"It is recommended to fill it in, but it is not mandatory."
+            )
+
+    for tag, policy in EMPTY_FIELD_POLICY.items():
+        # 'nothing' não gera nenhuma mensagem, então nem precisa procurar a tag.
+        if policy == 'nothing':
+            continue
+
+        elements = trial.findall(f".//{tag}")
+
+        # Caso 3: a tag não existe no XML -> tratada como vazia.
+        if not elements:
+            flag(tag, policy, None)
+            continue
+
+        # Casos 1 e 2: a tag existe, mas pode estar sem conteúdo.
+        for element in elements:
+            # Considera vazio: sem texto (ou só espaços) e sem filhos.
+            is_empty = (element.text is None or not element.text.strip()) and len(element) == 0
+            if is_empty:
+                flag(tag, policy, element.sourceline)
+
+    return errors, warnings
+
+
 def preprocess_trial(trial):
     """Aplica todas as correções no trial (in-place) e devolve a lista de avisos.
 
