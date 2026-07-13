@@ -7,6 +7,32 @@ generated warning messages to the provided ``trial_warnings`` list.
 from lxml import etree
 
 
+def fix_tag_case(trial, trial_warnings, valid_tags):
+    """Corrige tags cuja capitalização não bate com a esperada pelo XSD.
+
+    Alguns registros chegam com tags como <Scientific_acronym> em vez de
+    <scientific_acronym>. Como XML é case-sensitive, o XSD rejeita isso como
+    "elemento inesperado" mesmo o dado estando correto. Aqui a tag é renomeada
+    para a grafia correta (case-insensitive lookup em valid_tags) e um aviso é
+    emitido em vez de estourar erro.
+    """
+    if not valid_tags:
+        return
+
+    for element in trial.iter():
+        tag = element.tag
+        if not isinstance(tag, str):
+            continue  # ignora comentários/PIs, cujo .tag não é string
+
+        correct_tag = valid_tags.get(tag.lower())
+        if correct_tag and correct_tag != tag:
+            element.tag = correct_tag
+            trial_warnings.append(
+                f"Warning: The tag &lt;{tag}&gt; is written with incorrect capitalization. "
+                f"It was automatically accepted, but the correct form is lowercase: &lt;{correct_tag}&gt;."
+            )
+
+
 def truncate_fields(trial, trial_warnings):
     """Trunca os campos que ultrapassam o tamanho máximo permitido.
 
@@ -185,13 +211,17 @@ def check_empty_fields(trial):
     return errors, warnings
 
 
-def preprocess_trial(trial):
+def preprocess_trial(trial, valid_tags=None):
     """Aplica todas as correções no trial (in-place) e devolve a lista de avisos.
 
-    Executa, nesta ordem: truncagem de campos, separação de países, limpeza de
-    espaços em datas e preenchimento de containers vazios.
+    Executa, nesta ordem: correção de capitalização de tags, truncagem de
+    campos, separação de países, limpeza de espaços em datas e preenchimento
+    de containers vazios. A correção de capitalização roda primeiro para que
+    as demais etapas (que buscam tags pelo nome exato) já encontrem os nomes
+    corretos.
     """
     trial_warnings = []
+    fix_tag_case(trial, trial_warnings, valid_tags)
     truncate_fields(trial, trial_warnings)
     split_multiple_countries(trial, trial_warnings)
     strip_date_whitespace(trial, trial_warnings)

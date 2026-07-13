@@ -19,9 +19,19 @@ from reports import write_error_report, write_warning_report
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
+# Limite generoso (500MB) só para dar uma mensagem clara em vez de um erro
+# genérico caso o upload estoure. Não é a causa conhecida de falhas com
+# arquivos grandes — isso costuma estar no timeout do proxy/gunicorn na VPS.
+app.config['MAX_CONTENT_LENGTH'] = 500 * 1024 * 1024
 
 # Ensure base directories exist
 ensure_base_folders()
+
+
+@app.errorhandler(413)
+def file_too_large(e):
+    """Devolve um JSON claro quando o upload excede MAX_CONTENT_LENGTH."""
+    return jsonify({'error': 'Uploaded file is too large (limit: 500MB).'}), 413
 
 
 @app.route('/')
@@ -66,6 +76,14 @@ def process_file():
         xsd_doc = etree.parse(XSD_FILE)
         schema = etree.XMLSchema(xsd_doc)
 
+        # Nomes de tags válidos (em minúsculo) -> grafia correta, extraídos do
+        # próprio XSD. Usado para aceitar tags com capitalização errada
+        # (ex: <Scientific_acronym>) como warning em vez de erro.
+        valid_tags = {
+            name.lower(): name
+            for name in xsd_doc.xpath('//xs:element/@name', namespaces={'xs': 'http://www.w3.org/2001/XMLSchema'})
+        }
+
         xml_doc = etree.parse(file_path)
 
         # Limpa relatórios antigos da memória/disco
@@ -95,7 +113,7 @@ def process_file():
 
             filename = f"{safe_filename}.xml"
 
-            trial_warnings = preprocess_trial(trial)
+            trial_warnings = preprocess_trial(trial, valid_tags)
 
             # Aplica a política de campos vazios (EMPTY_FIELD_POLICY):
             # campos vazios marcados como 'warning' viram avisos; os marcados
