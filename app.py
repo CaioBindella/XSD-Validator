@@ -7,8 +7,10 @@ módulos auxiliares (config, helpers, trial_processor e reports).
 """
 
 import os
+import uuid
 from datetime import datetime
 from flask import Flask, render_template, request, jsonify, send_from_directory
+from werkzeug.utils import secure_filename
 from lxml import etree
 
 from validator import validate_trial_element
@@ -65,8 +67,14 @@ def process_file():
     if file.filename == '':
         return jsonify({'error': 'Empty filename'}), 400
 
-    # Save uploaded file temporarily for processing
-    file_path = os.path.join(UPLOAD_FOLDER, file.filename)
+    # Save uploaded file temporarily for processing. secure_filename() impede
+    # path traversal (ex: filename="../../important_file.txt" sobrescrevendo
+    # arquivos fora de UPLOAD_FOLDER). Vários nomes distintos (ex: unicode-only,
+    # "..xml") podem colapsar para o mesmo nome sanitizado, então prefixamos com
+    # um uuid por requisição para nunca colidir com um upload concorrente.
+    sanitized_name = secure_filename(file.filename) or "upload.xml"
+    safe_upload_name = f"{uuid.uuid4().hex}_{sanitized_name}"
+    file_path = os.path.join(UPLOAD_FOLDER, safe_upload_name)
     file.save(file_path)
 
     if not os.path.exists(XSD_FILE):
@@ -182,4 +190,4 @@ def process_file():
 
 if __name__ == '__main__':
     print("Server running! Open http://127.0.0.1:5000 in your browser.")
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=False)

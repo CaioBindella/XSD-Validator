@@ -1,3 +1,11 @@
+function escapeHtml(value) {
+    // trial_id vem do XML do usuário sem sanitização; escapa antes de inserir
+    // via innerHTML pra evitar XSS (ex: <trial_id><img src=x onerror=...></trial_id>).
+    const div = document.createElement('div');
+    div.textContent = String(value);
+    return div.innerHTML;
+}
+
 async function uploadAndProcess() {
     const fileInput = document.getElementById('xmlFile');
     const file = fileInput.files[0];
@@ -72,7 +80,7 @@ function updateInterface(data) {
                 // Monta o visual para a aba de Success (como já estava)
                 let warningsList = item.warnings.map(w => `<li>${w}</li>`).join('');
                 htmlSuccess += `<tr class="table-warning">
-                    <td class="align-middle"><strong>${item.id}</strong></td>
+                    <td class="align-middle"><strong>${escapeHtml(item.id)}</strong></td>
                     <td>
                         ${item.file}
                         <div class="mt-2 text-dark">
@@ -88,7 +96,7 @@ function updateInterface(data) {
                 // --- NOVO: Monta o visual exclusivo para a nova aba Warnings ---
                 warningCount += 1;
                 htmlWarning += `<tr>
-                    <td class="align-middle fw-bold text-dark">${item.id}</td>
+                    <td class="align-middle fw-bold text-dark">${escapeHtml(item.id)}</td>
                     <td class="align-middle">${item.file}</td>
                     <td>
                         <ul class="mb-0" style="font-size: 0.85em; color: #856404;">
@@ -99,7 +107,7 @@ function updateInterface(data) {
                 
             } else {
                 htmlSuccess += `<tr>
-                    <td class="align-middle fw-bold text-dark">${item.id}</td>
+                    <td class="align-middle fw-bold text-dark">${escapeHtml(item.id)}</td>
                     <td class="align-middle">${item.file}</td>
                     <td class="align-middle"><span class="badge bg-success">Valid</span></td>
                 </tr>`;
@@ -144,8 +152,8 @@ function updateInterface(data) {
             html += `
             <div class="card mb-3 border-danger shadow-sm">
                 <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center py-2">
-                    <span>Trial ID: <strong>${item.id}</strong></span>
-                    <span style="font-size: 0.85em; opacity: 0.9;"><i class="bi bi-folder2-open"></i> ${item.folder}</span>
+                    <span>Trial ID: <strong>${escapeHtml(item.id)}</strong></span>
+                    <span style="font-size: 0.85em; opacity: 0.9;"><i class="bi bi-folder2-open"></i> ${escapeHtml(item.folder)}</span>
                 </div>
                 <div class="card-body bg-light">
                     <h6 class="card-title text-danger fw-bold"><i class="bi bi-exclamation-octagon-fill"></i> Validation Errors:</h6>
