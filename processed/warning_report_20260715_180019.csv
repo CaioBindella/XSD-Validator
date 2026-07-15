@@ -1,0 +1,298 @@
+Trial ID,Warning Message
+LBCTR2018120174,Warning: The &lt;i_freetext&gt; tag exceeded the allowed limit. It will be truncated at 2997 characters...
+LBCTR2018120174,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2018120174,Warning: The container &lt;source_support&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019020181,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019020181,Warning: The container &lt;source_support&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019080216,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019090265,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2020071296,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2019040213,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2019040213,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2019040213,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019090238,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2019090248,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2020023398,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020093402,Warning: The &lt;inclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2020093402,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2020093402,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2020093402,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020083421,Warning: The &lt;inclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2020083421,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2020083421,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2020033424,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2020043459,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2018090151,Warning: The container &lt;health_condition_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2018090151,Warning: The container &lt;health_condition_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2018090151,Warning: The container &lt;intervention_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2018090151,Warning: The container &lt;intervention_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2018090151,Warning: The container &lt;primary_outcome&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2018090151,Warning: The container &lt;secondary_outcome&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2018090151,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2018090151,Warning: The container &lt;source_support&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2018090151,"Warning: The &lt;country1&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2018090151,"Warning: The &lt;country1&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2018090151,"Warning: The &lt;telephone&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2018090151,"Warning: The &lt;telephone&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2018090151,"Warning: The &lt;email&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2018090151,"Warning: The &lt;email&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2018090151,"Warning: The &lt;country2&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2019080217,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2021024523,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2018120171,Warning: The &lt;inclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2018120171,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2020104612,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2020124680,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2020023394,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2021014721,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2021054742,Warning: The container &lt;intervention_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2021054742,Warning: The container &lt;intervention_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2021024744,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2021024744,Warning: The container &lt;source_support&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2021064783,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2021064783,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2021074838,Warning: The container &lt;secondary_outcome&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2021074838,"Warning: The &lt;country2&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2022024840,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2022024840,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2022014844,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2022014844,"Warning: The &lt;country2&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2022014845,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2022014845,"Warning: The &lt;country2&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2019010169,Warning: The container &lt;health_condition_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019010169,Warning: The container &lt;health_condition_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019010169,Warning: The container &lt;intervention_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019010169,Warning: The container &lt;intervention_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019010169,Warning: The container &lt;primary_outcome&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019010169,Warning: The container &lt;secondary_outcome&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019010169,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019010169,Warning: The container &lt;source_support&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019010169,"Warning: The &lt;country1&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2019010169,"Warning: The &lt;country1&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2019010169,"Warning: The &lt;telephone&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2019010169,"Warning: The &lt;telephone&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2019010169,"Warning: The &lt;email&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2019010169,"Warning: The &lt;email&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2019010169,"Warning: The &lt;country2&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2021064791,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2021124934,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2022074978,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2022074978,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2022074978,"Warning: The &lt;country2&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2021104870,Warning: The &lt;results_IPD_description&gt; tag exceeded the allowed limit. It will be truncated at 1997 characters...
+LBCTR2021104870,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2021104870,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020043435,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2022035012,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2022035014,Warning: The container &lt;intervention_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2022035014,Warning: The container &lt;intervention_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020114568,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2019020196,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2020104622,Warning: The &lt;inclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2020104622,Warning: The container &lt;health_condition_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020104622,Warning: The container &lt;health_condition_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020104622,Warning: The container &lt;intervention_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020104622,Warning: The container &lt;intervention_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020104622,Warning: The container &lt;primary_outcome&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020104622,Warning: The container &lt;secondary_outcome&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020104622,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020104622,Warning: The container &lt;source_support&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020104622,"Warning: The &lt;country1&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2020104622,"Warning: The &lt;country1&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2020104622,"Warning: The &lt;telephone&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2020104622,"Warning: The &lt;telephone&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2020104622,"Warning: The &lt;email&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2020104622,"Warning: The &lt;email&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2020104622,"Warning: The &lt;country2&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2022095130,Warning: The container &lt;secondary_outcome&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2022095130,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2022085018,Warning: The &lt;i_freetext&gt; tag exceeded the allowed limit. It will be truncated at 2997 characters...
+LBCTR2022085018,Warning: The &lt;results_IPD_description&gt; tag exceeded the allowed limit. It will be truncated at 1997 characters...
+LBCTR2022085018,Warning: The &lt;inclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2020033438,Warning: The &lt;results_IPD_description&gt; tag exceeded the allowed limit. It will be truncated at 1997 characters...
+LBCTR2020033438,Warning: The &lt;inclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2020033438,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2023015204,Warning: The &lt;results_IPD_description&gt; tag exceeded the allowed limit. It will be truncated at 1997 characters...
+LBCTR2023015204,Warning: The container &lt;health_condition_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023015204,Warning: The container &lt;health_condition_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023015204,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023015206,Warning: The &lt;results_IPD_description&gt; tag exceeded the allowed limit. It will be truncated at 1997 characters...
+LBCTR2023015206,Warning: The container &lt;health_condition_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023015206,Warning: The container &lt;health_condition_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023015206,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023055223,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2023055223,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2023055223,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023055223,Warning: The container &lt;source_support&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2021074831,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2023115324,Warning: The &lt;inclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2023115324,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2023075332,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2023075332,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020113522,Warning: The &lt;i_freetext&gt; tag exceeded the allowed limit. It will be truncated at 2997 characters...
+LBCTR2020113522,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2023065392,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2024015424,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2024015424,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2023095432,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2023095432,Warning: The container &lt;health_condition_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023095432,Warning: The container &lt;health_condition_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023095432,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023095432,Warning: The container &lt;source_support&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023065377,Warning: The container &lt;health_condition_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023065377,Warning: The container &lt;health_condition_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023065377,Warning: The container &lt;intervention_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023065377,Warning: The container &lt;intervention_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023065377,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023065377,Warning: The container &lt;source_support&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019030205,Warning: The &lt;results_IPD_description&gt; tag exceeded the allowed limit. It will be truncated at 1997 characters...
+LBCTR2019030205,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2019030205,Warning: The container &lt;health_condition_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019030205,Warning: The container &lt;health_condition_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019030205,Warning: The container &lt;intervention_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019030205,Warning: The container &lt;intervention_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019030205,Warning: The container &lt;primary_outcome&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019030205,Warning: The container &lt;secondary_outcome&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019030205,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019030205,Warning: The container &lt;source_support&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019030205,"Warning: The &lt;country1&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2019030205,"Warning: The &lt;country1&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2019030205,"Warning: The &lt;telephone&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2019030205,"Warning: The &lt;telephone&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2019030205,"Warning: The &lt;email&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2019030205,"Warning: The &lt;email&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2019030205,"Warning: The &lt;country2&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2019050229,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023105464,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2023105464,Warning: The container &lt;secondary_outcome&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023105464,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023115474,"Warning: The &lt;country2&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2024015480,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023125487,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023125487,Warning: The container &lt;source_support&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019060241,Warning: The &lt;i_freetext&gt; tag exceeded the allowed limit. It will be truncated at 2997 characters...
+LBCTR2019010167,Warning: The &lt;i_freetext&gt; tag exceeded the allowed limit. It will be truncated at 2997 characters...
+LBCTR2019010167,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020043405,Warning: The &lt;inclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2020043405,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2020043427,Warning: The &lt;inclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2020043427,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2024045561,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2024045561,Warning: The container &lt;source_support&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2022095104,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2020033434,Warning: The &lt;results_IPD_description&gt; tag exceeded the allowed limit. It will be truncated at 1997 characters...
+LBCTR2020033434,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2020033434,Warning: The container &lt;health_condition_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020033434,Warning: The container &lt;health_condition_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020033434,Warning: The container &lt;intervention_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020033434,Warning: The container &lt;intervention_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020033434,Warning: The container &lt;primary_outcome&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020033434,Warning: The container &lt;secondary_outcome&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020033434,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020033434,Warning: The container &lt;source_support&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020033434,"Warning: The &lt;country1&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2020033434,"Warning: The &lt;country1&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2020033434,"Warning: The &lt;telephone&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2020033434,"Warning: The &lt;telephone&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2020033434,"Warning: The &lt;email&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2020033434,"Warning: The &lt;email&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2020033434,"Warning: The &lt;country2&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2019090195,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2019090245,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2024095653,Warning: The container &lt;health_condition_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2024095653,Warning: The container &lt;health_condition_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2024095653,Warning: The container &lt;intervention_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2024095653,Warning: The container &lt;intervention_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2024095653,Warning: The container &lt;primary_outcome&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2024095653,Warning: The container &lt;secondary_outcome&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2024095653,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2024095653,Warning: The container &lt;source_support&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2025065729,Warning: The container &lt;health_condition_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2025065729,Warning: The container &lt;health_condition_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2025065729,Warning: The container &lt;intervention_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2025065729,Warning: The container &lt;intervention_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2025065729,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2025065729,Warning: The container &lt;source_support&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2025065729,"Warning: The &lt;country2&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2020033423,Warning: The &lt;results_IPD_description&gt; tag exceeded the allowed limit. It will be truncated at 1997 characters...
+LBCTR2021124932,Warning: The &lt;results_IPD_description&gt; tag exceeded the allowed limit. It will be truncated at 1997 characters...
+LBCTR2021124932,Warning: The container &lt;intervention_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2021124932,Warning: The container &lt;intervention_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2021124932,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2021124932,"Warning: The &lt;country1&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2021124932,"Warning: The &lt;country1&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2021124932,"Warning: The &lt;telephone&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2021124932,"Warning: The &lt;telephone&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2021124932,"Warning: The &lt;email&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2021124932,"Warning: The &lt;email&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2024045330,Warning: The &lt;inclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2024045330,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2024045330,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2024045330,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2024045330,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2025075755,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2025075755,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2025075755,Warning: The container &lt;source_support&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023035313,Warning: The container &lt;health_condition_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023035313,Warning: The container &lt;health_condition_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023035313,Warning: The container &lt;intervention_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023035313,Warning: The container &lt;intervention_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023035313,Warning: The container &lt;primary_outcome&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023035313,Warning: The container &lt;secondary_outcome&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023035313,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023035313,Warning: The container &lt;source_support&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023035313,"Warning: The &lt;country1&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2023035313,"Warning: The &lt;country1&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2023035313,"Warning: The &lt;telephone&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2023035313,"Warning: The &lt;telephone&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2023035313,"Warning: The &lt;email&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2023035313,"Warning: The &lt;email&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2023035313,"Warning: The &lt;country2&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2022095114,Warning: The container &lt;health_condition_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2022095114,Warning: The container &lt;health_condition_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2022095114,Warning: The container &lt;intervention_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2022095114,Warning: The container &lt;intervention_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2022095114,Warning: The container &lt;primary_outcome&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2022095114,Warning: The container &lt;secondary_outcome&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2022095114,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2022095114,Warning: The container &lt;source_support&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2022095114,"Warning: The &lt;country1&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2022095114,"Warning: The &lt;country1&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2022095114,"Warning: The &lt;telephone&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2022095114,"Warning: The &lt;telephone&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2022095114,"Warning: The &lt;email&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2022095114,"Warning: The &lt;email&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2022095114,"Warning: The &lt;country2&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2022105085,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020124720,Warning: The container &lt;health_condition_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020124720,Warning: The container &lt;health_condition_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020124720,Warning: The container &lt;intervention_code&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020124720,Warning: The container &lt;intervention_keyword&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020124720,Warning: The container &lt;primary_outcome&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020124720,Warning: The container &lt;secondary_outcome&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020124720,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020124720,Warning: The container &lt;source_support&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020124720,"Warning: The &lt;country1&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2020124720,"Warning: The &lt;country1&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2020124720,"Warning: The &lt;telephone&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2020124720,"Warning: The &lt;telephone&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2020124720,"Warning: The &lt;email&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2020124720,"Warning: The &lt;email&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2020124720,"Warning: The &lt;country2&gt; tag is empty. It is recommended to fill it in, but it is not mandatory."
+LBCTR2025035706,Warning: The &lt;i_freetext&gt; tag exceeded the allowed limit. It will be truncated at 2997 characters...
+LBCTR2025035706,Warning: The &lt;results_IPD_description&gt; tag exceeded the allowed limit. It will be truncated at 1997 characters...
+LBCTR2025035706,Warning: The &lt;inclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2025035706,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2024015502,Warning: The &lt;results_IPD_description&gt; tag exceeded the allowed limit. It will be truncated at 1997 characters...
+LBCTR2024015502,Warning: The &lt;inclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2024015502,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2024015502,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2020030186,Warning: The &lt;results_IPD_description&gt; tag exceeded the allowed limit. It will be truncated at 1997 characters...
+LBCTR2020030186,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2023115331,Warning: The &lt;results_IPD_description&gt; tag exceeded the allowed limit. It will be truncated at 1997 characters...
+LBCTR2023115331,Warning: The &lt;inclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2023115331,Warning: The &lt;i_code&gt; tag exceeded the allowed limit. It will be truncated at 252 characters...
+LBCTR2023115331,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023045220,Warning: The &lt;exclusion_criteria&gt; tag exceeded the allowed limit. It will be truncated at 3997 characters...
+LBCTR2023045220,Warning: The container &lt;secondary_sponsor&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.
+LBCTR2023045220,Warning: The container &lt;source_support&gt; or its subtag was empty. Automatically filled with standard structure '-' to comply with the schema sequence.

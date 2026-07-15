@@ -1,3 +1,11 @@
+function escapeHtml(value) {
+    // trial_id vem do XML do usuário sem sanitização; escapa antes de inserir
+    // via innerHTML pra evitar XSS (ex: <trial_id><img src=x onerror=...></trial_id>).
+    const div = document.createElement('div');
+    div.textContent = String(value);
+    return div.innerHTML;
+}
+
 async function uploadAndProcess() {
     const fileInput = document.getElementById('xmlFile');
     const file = fileInput.files[0];
@@ -10,10 +18,14 @@ async function uploadAndProcess() {
 
     // Reset da Interface
     spinner.style.display = 'inline-block';
+    document.getElementById('count-success').innerText = '0';
+    document.getElementById('count-warning').innerText = '0'; 
+    document.getElementById('count-error').innerText = '0';
     document.getElementById('list-success').innerHTML = '';
+    document.getElementById('list-warning').innerHTML = '';
     document.getElementById('list-error').innerHTML = '';
-    document.getElementById('zip-download-container').style.display = 'none'; 
     document.getElementById('invalid-downloads-container').style.display = 'none';
+    document.getElementById('warning-downloads-container').style.display = 'none';
 
     const formData = new FormData();
     formData.append('file', file);
@@ -46,23 +58,29 @@ function updateInterface(data) {
     document.getElementById('count-success').innerText = data.success.length;
     document.getElementById('count-error').innerText = data.errors.length;
 
-    // Popula a Aba de Sucesso
+    // Popula a Aba de Sucesso e a Aba de Warnings
     const tbodySuccess = document.getElementById('list-success');
-    const zipContainer = document.getElementById('zip-download-container');
+    const tbodyWarning = document.getElementById('list-warning');
+    const warningDownloadsContainer = document.getElementById('warning-downloads-container');
+    const csvWarningBtn = document.getElementById('csv-warning-download-btn');
     
-    if (zipContainer) {
-        zipContainer.style.display = data.success.length === 0 ? 'none' : 'block';
-    }
+    let warningCount = 0;
 
     if (data.success.length === 0) {
         tbodySuccess.innerHTML = '<tr><td colspan="3" class="text-center text-muted py-4">No valid trials found.</td></tr>';
+        tbodyWarning.innerHTML = '<tr><td colspan="3" class="text-center text-muted py-4">No warnings found.</td></tr>';
+
+        document.getElementById('count-warning').innerText = '0';
     } else {
-        let html = '';
+        let htmlSuccess = '';
+        let htmlWarning = '';
+        
         data.success.forEach(item => {
             if (item.warnings && item.warnings.length > 0) {
+                // Monta o visual para a aba de Success (como já estava)
                 let warningsList = item.warnings.map(w => `<li>${w}</li>`).join('');
-                html += `<tr class="table-warning">
-                    <td class="align-middle"><strong>${item.id}</strong></td>
+                htmlSuccess += `<tr class="table-warning">
+                    <td class="align-middle"><strong>${escapeHtml(item.id)}</strong></td>
                     <td>
                         ${item.file}
                         <div class="mt-2 text-dark">
@@ -74,15 +92,44 @@ function updateInterface(data) {
                     </td>
                     <td class="align-middle"><span class="badge bg-success text-dark">Valid (Truncated)</span></td>
                 </tr>`;
+                
+                // --- NOVO: Monta o visual exclusivo para a nova aba Warnings ---
+                warningCount += 1;
+                htmlWarning += `<tr>
+                    <td class="align-middle fw-bold text-dark">${escapeHtml(item.id)}</td>
+                    <td class="align-middle">${item.file}</td>
+                    <td>
+                        <ul class="mb-0" style="font-size: 0.85em; color: #856404;">
+                            ${warningsList}
+                        </ul>
+                    </td>
+                </tr>`;
+                
             } else {
-                html += `<tr>
-                    <td class="align-middle fw-bold text-dark">${item.id}</td>
+                htmlSuccess += `<tr>
+                    <td class="align-middle fw-bold text-dark">${escapeHtml(item.id)}</td>
                     <td class="align-middle">${item.file}</td>
                     <td class="align-middle"><span class="badge bg-success">Valid</span></td>
                 </tr>`;
             }
         });
-        tbodySuccess.innerHTML = html;
+        
+        tbodySuccess.innerHTML = htmlSuccess;
+        
+        // Atualiza a aba de Warning
+        document.getElementById('count-warning').innerText = warningCount;
+        
+        if (warningCount === 0) {
+            tbodyWarning.innerHTML = '<tr><td colspan="3" class="text-center text-success py-4"><i class="bi bi-check-circle-fill fs-4 d-block mb-2"></i> Great! No warnings found.</td></tr>';
+        } else {
+            tbodyWarning.innerHTML = htmlWarning;
+            
+            // Ativa o botão de download de CSV de Warning
+            if (data.csv_warning_report && warningDownloadsContainer) {
+                csvWarningBtn.href = '/download/' + data.csv_warning_report;
+                warningDownloadsContainer.style.display = 'block';
+            }
+        }
     }
 
     // Popula a Aba de Erros (Invalid)
@@ -105,8 +152,8 @@ function updateInterface(data) {
             html += `
             <div class="card mb-3 border-danger shadow-sm">
                 <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center py-2">
-                    <span>Trial ID: <strong>${item.id}</strong></span>
-                    <span style="font-size: 0.85em; opacity: 0.9;"><i class="bi bi-folder2-open"></i> ${item.folder}</span>
+                    <span>Trial ID: <strong>${escapeHtml(item.id)}</strong></span>
+                    <span style="font-size: 0.85em; opacity: 0.9;"><i class="bi bi-folder2-open"></i> ${escapeHtml(item.folder)}</span>
                 </div>
                 <div class="card-body bg-light">
                     <h6 class="card-title text-danger fw-bold"><i class="bi bi-exclamation-octagon-fill"></i> Validation Errors:</h6>

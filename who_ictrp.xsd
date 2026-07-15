@@ -16,6 +16,9 @@
   <xs:simpleType name="str512">
     <xs:restriction base="xs:string"><xs:maxLength value="512"/></xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name="str800">
+    <xs:restriction base="xs:string"><xs:maxLength value="800"/></xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name="str1000">
     <xs:restriction base="xs:string"><xs:maxLength value="1000"/></xs:restriction>
   </xs:simpleType>
@@ -50,7 +53,7 @@
               <xs:element name="secondary_outcome" type="secondaryOutcomeType"/>
               <xs:element name="secondary_sponsor" type="secondarySponsorType"/>
               <xs:element name="secondary_ids" type="secondaryIdsType"/>
-              <xs:element name="source_support" type="sourceSupportType"/>
+              <xs:element name="source_support" type="sourceSupportType" maxOccurs="unbounded"/>
               <xs:element name="ethics_reviews" type="ethicsReviewsType"/>
             </xs:sequence>
           </xs:complexType>
@@ -83,7 +86,7 @@
       <xs:element name="results_actual_enrolment" type="str255"/>
       <xs:element name="results_date_completed" type="str10"/>
       <xs:element name="results_url_link" type="str255"/>
-      <xs:element name="results_summary" type="str512"/>
+      <xs:element name="results_summary" type="str4000"/>
       <xs:element name="results_date_posted" type="str10"/>
       <xs:element name="results_date_first_publication" type="str10"/>
       <xs:element name="results_baseline_char" type="str8000"/>
@@ -159,15 +162,17 @@
   </xs:complexType>
   
   <xs:complexType name="secondarySponsorType">
-    <xs:sequence><xs:element name="sponsor_name" type="str2000" maxOccurs="unbounded"/></xs:sequence>
+    <xs:sequence>
+      <xs:element name="sponsor_name" type="str2000" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="secondaryIdsType">
     <xs:sequence>
-      <xs:element name="secondary_id" maxOccurs="unbounded">
+      <xs:element name="secondary_id" minOccurs="0" maxOccurs="unbounded">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="sec_id" type="str50"/>
+            <xs:element name="sec_id" type="str800"/>
             <xs:element name="issuing_authority" type="str255"/>
           </xs:sequence>
         </xs:complexType>

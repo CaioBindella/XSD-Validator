@@ -12,6 +12,7 @@
       <type_enrolment>Actual</type_enrolment>
       <target_size>100</target_size>
       <recruitment_status>Recruiting</recruitment_status>
+      <url>http://example.com</url>
       <study_type>interventional</study_type>
       <study_design>Randomized</study_design>
       <phase>Phase 3</phase>
@@ -67,6 +68,7 @@
       <type_enrolment>Actual</type_enrolment>
       <target_size>100</target_size>
       <recruitment_status>Recruiting</recruitment_status>
+      <url>http://example.com</url>
       <study_type>interventional</study_type>
       <study_design>Randomized</study_design>
       <phase>Phase 3</phase>
@@ -122,7 +124,9 @@
       <type_enrolment>Actual</type_enrolment>
       <target_size>100</target_size>
       <recruitment_status>Recruiting</recruitment_status>
-      <recruitment_status>Suspended</recruitment_status> <study_type>interventional</study_type>
+      <url>http://example.com</url>
+      <recruitment_status>Suspended</recruitment_status>
+      <study_type>interventional</study_type>
       <study_design>Randomized</study_design>
       <phase>Phase 3</phase>
       <results_actual_enrolment>0</results_actual_enrolment>

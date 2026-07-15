@@ -2,18 +2,19 @@
 <trials>
   <trial>
     <main>
-      <trial_id>TESTE-06-LISTA</trial_id>
+      <trial_id>TESTE-12-TAGCASE</trial_id>
       <reg_name>United States Registry</reg_name>
-      <date_registration>06/01/2026</date_registration>
+      <date_registration>01/01/2026</date_registration>
       <primary_sponsor>Example University</primary_sponsor>
       <public_title>Public Study Title</public_title>
       <scientific_title>Full Scientific Title</scientific_title>
+      <Scientific_acronym>FST-01</Scientific_acronym>
       <date_enrolment>01/02/2026</date_enrolment>
       <type_enrolment>Actual</type_enrolment>
       <target_size>100</target_size>
       <recruitment_status>Recruiting</recruitment_status>
       <url>http://example.com</url>
-      <study_type>interventional</study_type>
+      <study_type>Interventional</study_type>
       <study_design>Randomized</study_design>
       <phase>Phase 3</phase>
       <results_actual_enrolment>0</results_actual_enrolment>
@@ -33,17 +34,11 @@
     <contacts>
       <contact>
         <type>Scientific</type><firstname>John</firstname><middlename>Charles</middlename><lastname>Smith</lastname>
-        <address>123 Flower Street</address><city>New York</city><country1>United States</country1><zip>10001</zip>
+        <address>123 Flower Street</address><City>New York</City><country1>United States</country1><zip>10001</zip>
         <telephone>+12125550199</telephone><email>john@example.com</email><affiliation>NY University</affiliation>
       </contact>
     </contacts>
-    <countries>
-      <country2>Brazil</country2>
-      <country2>United States</country2>
-      <country2>Canada</country2>
-      <country2>Mexico</country2>
-      <country2>Argentina</country2>
-    </countries>
+    <countries><country2>United States</country2></countries>
     <criteria>
       <inclusion_criteria>Healthy adults</inclusion_criteria><agemin>18</agemin><agemax>65</agemax><gender>Both</gender><exclusion_criteria>Pregnant women</exclusion_criteria>
     </criteria>
