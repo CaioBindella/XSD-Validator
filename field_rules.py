@@ -213,3 +213,33 @@ EMPTY_CONTAINERS_RULES = {
     'source_support': 'source_name',
     'ethics_reviews': 'ethics_review'
 }
+
+
+# =========================================================================
+# Política dos containers que chegam SEM a subtag obrigatória.
+# Ex.: <health_condition_code> </health_condition_code>
+#
+#   'autofill' -> injeta a subtag preenchida com '-' e emite um WARNING;
+#                 o registro continua válido e é importado.
+#   'error'    -> o container não é tocado; vale o que veio da origem. Sem a
+#                 subtag, o XSD reprova e o registro nacional tem que corrigir
+#                 o XML na origem.
+#
+# ATENÇÃO: só o container sem subtag alguma é reprovado. A forma
+# <health_condition_code><hc_code/></health_condition_code> é o jeito correto de
+# representar "sem valor" segundo a ICTRP: ela é aceita e o valor vazio é
+# preservado (não vira '-', justamente para não inventar dado que a origem
+# declarou como inexistente).
+# =========================================================================
+EMPTY_CONTAINERS_POLICY = {
+    'health_condition_code': 'error',
+    'health_condition_keyword': 'error',
+    'intervention_code': 'autofill',
+    'intervention_keyword': 'autofill',
+    'primary_outcome': 'autofill',
+    'secondary_outcome': 'autofill',
+    'secondary_sponsor': 'autofill',
+    'secondary_ids': 'autofill',
+    'source_support': 'autofill',
+    'ethics_reviews': 'autofill',
+}

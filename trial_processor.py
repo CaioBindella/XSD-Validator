@@ -94,6 +94,30 @@ def strip_date_whitespace(trial, trial_warnings):
                 trial_warnings.append(f"Warning: The &lt;{date_tag}&gt; tag contained leading or trailing whitespace. The spaces were automatically ignored for import, but please correct the formatting in your source file.")
 
 
+def container_state(parent_node, child_tag):
+    """Classifica como o container chegou: sem subtag, com subtag vazia ou ok.
+
+    Retorna 'missing_child' quando a mãe não tem subtag alguma
+    (ex: <health_condition_code> </health_condition_code>), 'empty_child' quando
+    tem a subtag obrigatória mas sem conteúdo (ex: <hc_code/>) e 'ok' nos demais
+    casos. A distinção importa porque, para a ICTRP, 'empty_child' é a forma
+    correta de declarar "sem valor" — só 'missing_child' é XML malformado.
+    """
+    total_children = len(parent_node)
+
+    # 1. Caso clássico: A tag mãe está totalmente vazia (<tag/> ou <tag></tag>)
+    if (parent_node.text is None or not parent_node.text.strip()) and total_children == 0:
+        return 'missing_child'
+
+    # 2. Caso específico: A tag mãe tem UMA tag filha, mas essa subtag está vazia (ex: <intervention_code><i_code/></intervention_code>)
+    if total_children == 1:
+        child_node = parent_node.find(f'./{child_tag}')
+        if child_node is not None and (child_node.text is None or not child_node.text.strip()) and len(child_node) == 0:
+            return 'empty_child'
+
+    return 'ok'
+
+
 def fill_empty_containers(trial, trial_warnings):
     """Preenche tags-container vazias com uma estrutura padrão '-' para o XSD.
 
@@ -101,26 +125,24 @@ def fill_empty_containers(trial, trial_warnings):
     subtag vazia) e, conforme a regra em EMPTY_CONTAINERS_RULES, injeta a subtag
     obrigatória preenchida com '-'. Trata estruturas mais complexas
     (secondary_id e ethics_review) montando seus subelementos, e gera um aviso.
+
+    Containers marcados como 'error' em EMPTY_CONTAINERS_POLICY ficam de fora:
+    neles vale exatamente o que a origem mandou. Sem a subtag, o próprio XSD
+    reprova o trial; com a subtag vazia (<hc_code/>), que é como a ICTRP pede
+    que se declare "sem valor", o vazio é preservado em vez de virar '-'.
     """
-    from field_rules import EMPTY_CONTAINERS_RULES
+    from field_rules import EMPTY_CONTAINERS_RULES, EMPTY_CONTAINERS_POLICY
 
     for parent_tag, child_tag in EMPTY_CONTAINERS_RULES.items():
+        if EMPTY_CONTAINERS_POLICY.get(parent_tag) == 'error':
+            continue
+
         parent_node = trial.find(f'.//{parent_tag}')
         if parent_node is not None:
-            total_children = len(parent_node)
-
-            # 1. Caso clássico: A tag mãe está totalmente vazia (<tag/> ou <tag></tag>)
-            is_empty_parent = (parent_node.text is None or not parent_node.text.strip()) and total_children == 0
-
-            # 2. Caso específico: A tag mãe tem UMA tag filha, mas essa subtag está vazia (ex: <intervention_code><i_code/></intervention_code>)
-            is_subtag_empty = False
-            if total_children == 1:
-                child_node = parent_node.find(f'./{child_tag}')
-                if child_node is not None and (child_node.text is None or not child_node.text.strip()) and len(child_node) == 0:
-                    is_subtag_empty = True
+            state = container_state(parent_node, child_tag)
 
             # Se cair em qualquer um dos dois casos de falso positivo por estar vazio
-            if is_empty_parent or is_subtag_empty:
+            if state != 'ok':
                 # Limpa qualquer estrutura mal formada que sobrou dentro dela
                 parent_node.clear()
 
