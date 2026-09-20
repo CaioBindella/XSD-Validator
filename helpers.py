@@ -32,6 +32,27 @@ def enhance_error_message(msg, trial_element=None):
     padrão de "elemento inesperado", devolve uma dica mais clara — diferenciando
     o caso de tag duplicada do caso de tag faltando/fora de ordem.
     """
+    # Container que chegou sem a subtag obrigatória, ex:
+    # <health_condition_code> </health_condition_code>. Acontece com os
+    # containers marcados como 'error' em EMPTY_CONTAINERS_POLICY, que de
+    # propósito não são autocorrigidos.
+    missing_child = re.search(
+        r"Element '([^']+)': Missing child element\(s\)\. Expected is \( ([^ ]+) \)", msg
+    )
+    if missing_child:
+        parent_tag = missing_child.group(1)
+        child_tag = missing_child.group(2)
+        base = (f"Missing Required Subtag: The container &lt;{parent_tag}&gt; has no "
+                f"&lt;{child_tag}&gt; subtag.")
+
+        # As subtags compostas têm campos obrigatórios próprios, então para elas
+        # não faz sentido sugerir a versão vazia.
+        if child_tag in ('secondary_id', 'ethics_review'):
+            return f"{base} [TIP: Add a complete &lt;{child_tag}&gt; block inside &lt;{parent_tag}&gt;.]"
+
+        return (f"{base} [TIP: If there is no value, send the empty subtag: "
+                f"&lt;{parent_tag}&gt;&lt;{child_tag}/&gt;&lt;/{parent_tag}&gt;.]")
+
     match = re.search(r"Element '([^']+)': This element is not expected\. Expected is \( ([^ ]+) \)", msg)
 
     if match:
